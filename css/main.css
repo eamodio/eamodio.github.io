@@ -1,0 +1,110 @@
+html {
+    box-sizing: border-box;
+    color: #222;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1em;
+    line-height: 1.4;
+    height: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+    background-color: black;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url(../img/bg.jpg) 50% 50% / cover no-repeat;
+    height: 100%;
+    position: relative;
+}
+
+.hero-content {
+    color: white;
+    font-size: 2.5em;
+    text-align: center;
+    position: absolute;
+    top: 30%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+h1, h2 {
+    padding: 0;
+    margin: 0;
+    letter-spacing: 10px;
+    text-shadow: 1px 2px 4px #26262a, 0px 0px 42px #666;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+footer {
+    color: white;
+    display: block;
+    margin: -5.5em 0 0 0;
+    padding: 1em 0;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 1rem 0;
+    padding: 0;
+}
+
+.footer-links * {
+    display: flex;
+    align-items: center;
+}
+
+.footer-link {
+    display: inline-block;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.footer-link a {
+    display: block;
+    border: 0;
+    outline: none;
+    text-decoration: none;
+}
+
+.footer-link a svg path {
+    transition: fill 300ms ease-out;
+}
+.footer-link a svg:hover path {
+    fill: #7d16bf;
+    transition: fill 200ms ease-out;
+}
+
+.copyright {
+    display: block;
+    color: white;
+    font-weight: 100;
+    font-size: .75rem;
+    letter-spacing: 0.25em;
+    opacity: .25;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.copyright a {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: 0.1em;
+}
+
+        /* .PreFooter{border-top:2px solid rgba(128,128,128,0.08);margin-top:3rem}.PreFooter ul{margin-top:.5rem;list-style:none;padding:0}.PreFooter ul li{width:auto;display:inline-block;margin:0}.PreFooter ul li+li{margin-left:2rem}.PreFooter ul li:before{content:''} */
