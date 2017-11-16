@@ -153,6 +153,93 @@ body {
     padding: 0;
 }
 
+.header {
+    background: transparent;
+    color: white;
+    display: flex;
+    position: absolute;
+    top: 0;
+    padding: 1em;
+    width: 100%;
+    z-index: 1;
+}
+
+.header__buttons {
+    margin-left: auto;
+}
+
+.btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8em;
+    line-height: 1.5;
+    margin: 0 0.5em;
+    padding: .8em 1.5em;
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 1px #000;
+    text-decoration: none;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn--outlined {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 0 2px white;
+    color: white;
+    font-weight: 600;
+    position: relative;
+    transition: color 250ms, background-color 250ms;
+}
+
+.btn--outlined::before,
+.btn--outlined::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.btn--outlined::before {
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}
+
+.btn--outlined::after {
+    border-top-width: 2px;
+    border-right-width: 2px;
+}
+
+.btn--outlined:hover {
+    color: #5b1089;
+    background: rgba(255, 255, 255, 0.2);
+    text-shadow: none;
+}
+
+.btn--outlined:hover::before,
+.btn--outlined:hover::after {
+    border-color: #5b1089;
+    transition: border-color 0s, width 250ms, height 250ms;
+    width: 100%;
+    height: 100%;
+}
+
+.btn--outlined:hover::before {
+    transition-delay: 0s, 0s, 0.25s;
+}
+
+.btn--outlined:hover::after {
+    transition-delay: 0s, 0.25s, 0s;
+}
+
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url(../img/bg.jpg) 50% 50% / cover no-repeat;
     height: 100%;
@@ -172,7 +259,7 @@ body {
 
 .hero__header,
 .hero__subhead,
-.hero__subhead2 {
+.hero__desc {
     font-size: 2em;
     padding: 0;
     margin: 0;
@@ -184,7 +271,7 @@ body {
     font-weight: 400;
 }
 
-.hero__subhead2 {
+.hero__desc {
     font-weight: 400;
     font-size: 1.5em;
     margin-top: 1em;
@@ -250,6 +337,24 @@ footer {
 }
 
 @media all and (max-width: 767px) {
+    .btn {
+        font-size: 0.1em;
+    }
+
+    .btn--outlined::before {
+        border-bottom-width: 1px;
+        border-left-width: 1px;
+    }
+
+    .btn--outlined::after {
+        border-top-width: 1px;
+        border-right-width: 1px;
+    }
+
+    .btn--outlined {
+        box-shadow: inset 0 0 0 1px white;
+    }
+
     .hero__content {
         font-size: 1em;
     }
@@ -258,7 +363,7 @@ footer {
         font-size: 1.5em;
     }
 
-    .hero__subhead2 {
+    .hero__desc {
         font-size: 1.25em;
         letter-spacing: 6px;
     }
