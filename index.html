@@ -69,8 +69,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/4.4.1/typeit.min.js" integrity="sha256-A7ZiNuvVx7oFlrqC0E1fGYf7Re/rreauKKPZO2KkvZc=" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $('.footer__marvin').on('click', function() {
-            $('body').append('<img class="marvin__takeover" src="img/marvin-takeover.svg" />');
-            $('.marvin__takeover').on('click', function() { this.remove(); });
+            $('body').append('<img class="marvin__takeover" src="img/marvin-takeover.svg" /><audio id="kaboom" autoplay><source src="kaboom.mp3"></audio>');
+            $('.marvin__takeover').on('click', function() {
+                $('#kaboom').remove();
+                this.remove();
+             });
         });
 
 
