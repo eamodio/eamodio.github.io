@@ -1,0 +1,21 @@
+{
+  "name": "amod.io",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "url": "https://github.com/eamodio/eamodio.github.io",
+    "type": "git"
+  },
+  "private": true,
+  "author": "Eric Amodio",
+  "license": "",
+  "engines": {
+    "node": ">= 6.11.0"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/cleancss -o css/main.min.css css/main.css"
+  },
+  "devDependencies": {
+    "clean-css-cli": "4.1.10"
+  }
+}

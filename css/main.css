@@ -128,8 +128,11 @@ button:-moz-focusring,
    outline: 1px dotted ButtonText;
 }
 
-/* Normalization End */
+.hidden {
+    visibility: hidden;
+}
 
+/* Normalization End */
 
 html {
     box-sizing: border-box;
@@ -156,6 +159,13 @@ body {
     overflow: hidden;
 }
 
+a {
+    border: 0;
+    font-weight: 600;
+    outline: none;
+    text-decoration: none;
+}
+
 .header {
     background: transparent;
     color: white;
@@ -167,11 +177,26 @@ body {
     z-index: 1;
 }
 
+.header__headine {
+    font-size: 2em;
+    padding: 0 0 0 0.5em;
+    letter-spacing: 0.125em;
+    text-shadow: 2px 3px 6px #000, 0px 0px 42px #666;
+
+    transform-origin: top left;
+    transform: translateY(-300%);
+    transition: transform 500ms 600ms cubic-bezier(1,.4,.7,1.5);
+}
+
+body[class*="is-section--"] .header__headine {
+    transform: translateY(-105%);
+}
+
 .header__buttons {
     margin-left: auto;
 }
 
-.btn {
+.button {
     background: none;
     border: none;
     cursor: pointer;
@@ -184,29 +209,36 @@ body {
     text-transform: uppercase;
 }
 
-.btn:focus {
+.button:focus {
     outline: none;
 }
 
-.btn--flat {
+.button--flat {
     background: rgba(0, 0, 0, 0.2);
     border: 2px solid white;
     color: white;
     transition: background-color 250ms, color 250ms;
 }
 
-.btn--flat:hover {
+.button--flat:hover {
     background-color: white;
     color: black;
 }
 
-.hero {
+body.is-section--about .button__about,
+body.is-section--gitlens .button__gitlens,
+body.is-section--resume .button__resume {
+    background: white;
+    color: black;
+}
+
+.main {
     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url(../img/bg.jpg) 50% 50% / cover no-repeat;
     height: 100%;
     position: relative;
 }
 
-.hero__content {
+.content__hero {
     color: white;
     font-size: 2.5em;
     text-align: center;
@@ -215,9 +247,13 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
+    transition: transform 1s cubic-bezier(.01,.3,.75,-1);
+}
+body[class*="is-section--"] .content__hero {
+    transform: translateX(-100%);
 }
 
-.hero__header,
+.hero__headine,
 .hero__subhead,
 .hero__desc {
     font-size: 2em;
@@ -237,10 +273,152 @@ body {
     margin-top: 1em;
 }
 
+.hero__button-container {
+    font-size: 0.5em;
+    position: relative;
+    top: 2em;
+    opacity: 1;
+    transition: opacity 750ms ease-in;
+}
+
+body[class*="is-section--"] .hero__button-container {
+    opacity: 0;
+    transition: opacity 500ms ease-out;
+}
+
+.hero__button-container.hidden {
+    opacity: 0;
+}
+
+.content__sections {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 0.5em;
+    color: black;
+    font-size: 2.5em;
+    margin: 5em auto;
+    max-width: 960px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    animation: fade-out 500ms ease-out;
+    animation-fill-mode: forwards;
+}
+
+body[class*="is-section--"] .content__sections {
+    visibility: hidden;
+    animation: fade-in 500ms 750ms ease-in;
+    animation-fill-mode: forwards;
+}
+
+.preload .content__sections {
+    animation-duration: 0s !important;
+}
+
+body:not(.is-section--about) .section__about,
+body:not(.is-section--gitlens) .section__gitlens,
+body:not(.is-section--resume) .section__resume {
+    display: none;
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; visibility: hidden; }
+    1% { visibility: visible; }
+    100% { opacity: 1; visibility: visible; }
+}
+
+@keyframes fade-out {
+    0% { opacity: 1; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+.section h3 {
+    margin: 0;
+    text-align: center
+}
+
+.section {
+    margin: -1em 1em 1em 1em;
+}
+
+.section p {
+    font-size: 0.5em;
+}
+
+.section blockquote {
+    font-size: 0.5em;
+    margin: 2em;
+}
+
+.section sup {
+    font-size: 0.6em;
+}
+
+.section p.footnote {
+    position: absolute;
+    bottom: 1em;
+    font-size: 0.4em;
+}
+
+.section__back-button {
+    border-radius: 50%;
+    box-shadow: #bbb 1px 1px 25px;
+    cursor: pointer;
+    display: inline-flex;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: scale(0.75);
+}
+
+.section__back-button svg:hover circle {
+    transition: fill 300ms ease-out;
+}
+
+.section__back-button svg:hover circle {
+    fill: white;
+    transition: fill 200ms ease-out;
+}
+
+.about__image {
+    background-size: cover;
+    width: 3em;
+    height: 3em;
+    margin: 0.5em auto;
+    box-shadow: black 1px 1px 25px;
+    border-radius: 50%;
+}
+
+.gitlens__image {
+    background-size: cover;
+    width: 3em;
+    height: 3em;
+    margin: 0.5em auto;
+}
+
 .heart {
     color: #f32216;
     position: relative;
     top: 0.1em;
+}
+
+blockquote:before {
+    color: #7a7a7a;
+    content: "\201C";
+    font-size: 3em;
+    line-height: 1;
+    position: absolute;
+    left: 0.75em;
+}
+
+blockquote:after {
+    color: #7a7a7a;
+    content: "\201D";
+    font-size: 3em;
+    line-height: 1;
+    position: absolute;
+    right: 0.75em;
 }
 
 footer {
@@ -270,14 +448,13 @@ footer {
 
 .footer__link a {
     display: block;
-    border: 0;
-    outline: none;
-    text-decoration: none;
+    font-weight: normal;
 }
 
 .footer__link a svg path {
     transition: fill 300ms ease-out;
 }
+
 .footer__link a svg:hover path {
     fill: #7d16bf;
     transition: fill 200ms ease-out;
@@ -296,9 +473,7 @@ footer {
 
 .footer__copyright a {
     color: rgba(255, 255, 255, 0.4);
-    font-weight: 600;
     letter-spacing: 0.1em;
-    text-decoration: none;
     transition: color 250ms;
 }
 
@@ -330,18 +505,51 @@ footer {
     z-index: 1;
 }
 
-@media all and (max-width: 767px) {
+@media all and (max-width: 1195px) {
+    .content__sections {
+        margin: 5em 3em;
+    }
+}
+
+@media all and (max-width: 700px) {
+    html {
+        font-size: 0.9em;
+    }
+
+    .content__sections {
+        margin: 5.5em 1.5em;
+    }
+}
+
+@media all and (max-width: 600px) {
     html {
         font-size: 0.6em;
     }
 
-    .hero__content {
+    .content__hero {
         top: 25%;
     }
 
-    .btn {
+    .content__sections {
+        margin: 4em 1.5em;
+    }
+
+    .section__back-button {
+        transform: scale(0.4);
+        top: -0.4em;
+        left: -0.4em;
+    }
+
+    .section {
+        margin: -2em 1em 1em 1em;
+    }
+
+    .section p {
+        font-size: 0.6em;
+    }
+
+    .button {
         background: none;
-        font-size: 0.9em;
     }
 
     .footer {
@@ -361,6 +569,16 @@ footer {
 @media all and (max-width: 320px) {
     html {
         font-size: 0.5em;
+    }
+
+    .header__buttons {
+        font-size: 0.6em;
+    }
+
+    .section__back-button {
+        transform: scale(0.4);
+        top: -0.6em;
+        left: -0.6em;
     }
 
     .footer__links {
