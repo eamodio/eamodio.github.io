@@ -270,6 +270,7 @@ body[class*="is-section--"] .content__hero {
 }
 
 .hero__subhead {
+    font-size: 1.8em;
     font-weight: 400;
 }
 
