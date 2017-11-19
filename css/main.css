@@ -185,11 +185,12 @@ a {
 
     transform-origin: top left;
     transform: translateY(-300%);
-    transition: transform 500ms 600ms cubic-bezier(1,.4,.7,1.5);
+    transition: transform 500ms cubic-bezier(1,.4,.7,1.5);
 }
 
 body[class*="is-section--"] .header__headine {
     transform: translateY(-105%);
+    transition-delay: 600ms;
 }
 
 .header__buttons {
@@ -304,12 +305,17 @@ body[class*="is-section--"] .hero__button-container {
     left: 0;
     animation: fade-out 500ms ease-out;
     animation-fill-mode: forwards;
+    transform: scale(.90);
+    transition: transform 500ms cubic-bezier(.8,-0.5,.2,1.5);
 }
 
 body[class*="is-section--"] .content__sections {
     visibility: hidden;
     animation: fade-in 500ms 750ms ease-in;
     animation-fill-mode: forwards;
+    transform: scale(1);
+
+    transition-delay: 600ms;
 }
 
 .preload .content__sections {
