@@ -170,18 +170,23 @@ a {
     background: transparent;
     color: white;
     display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: baseline;
     position: absolute;
     top: 0;
-    padding: 2em 1em;
+    padding: 1em 0.5em;
     width: 100%;
     z-index: 1;
 }
 
 .header__headine {
+    flex: auto 1 0;
     font-size: 2em;
-    padding: 0 0 0 0.5em;
+    margin: 0.1em 0 0 0.25em;
     letter-spacing: 0.125em;
     text-shadow: 2px 3px 6px #000, 0px 0px 42px #666;
+    max-width: 960px;
 
     transform-origin: top left;
     transform: translateY(-300%);
@@ -189,12 +194,13 @@ a {
 }
 
 body[class*="is-section--"] .header__headine {
-    transform: translateY(-105%);
+    transform: translateY(5%);
     transition-delay: 600ms;
 }
 
 .header__buttons {
-    margin-left: auto;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .button {
@@ -203,7 +209,6 @@ body[class*="is-section--"] .header__headine {
     cursor: pointer;
     font-size: 0.8em;
     letter-spacing: 0.25em;
-    line-height: 1.5;
     margin: 0 0.5em;
     padding: 1em 1.75em;
     text-decoration: none;
@@ -295,6 +300,8 @@ body[class*="is-section--"] .hero__button-container {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 0.5em;
     color: black;
+    display: flex;
+    flex-direction: column;
     font-size: 2.5em;
     margin: 5em auto;
     max-width: 960px;
@@ -322,6 +329,11 @@ body[class*="is-section--"] .content__sections {
     animation-duration: 0s !important;
 }
 
+.content__sections-scroller {
+    overflow-x: auto;
+    margin: 0.5em 0;
+}
+
 body:not(.is-section--about) .section__about,
 body:not(.is-section--gitlens) .section__gitlens,
 body:not(.is-section--resume) .section__resume {
@@ -345,7 +357,7 @@ body:not(.is-section--resume) .section__resume {
 }
 
 .section {
-    margin: -1em 1em 1em 1em;
+    margin: 0 1em;
 }
 
 .section p {
@@ -354,7 +366,7 @@ body:not(.is-section--resume) .section__resume {
 
 .section blockquote {
     font-size: 0.5em;
-    margin: 2em;
+    margin: 0 1.5em;
 }
 
 .section sup {
@@ -362,9 +374,8 @@ body:not(.is-section--resume) .section__resume {
 }
 
 .section p.footnote {
-    position: absolute;
-    bottom: 1em;
-    font-size: 0.4em;
+    font-size: 0.3em;
+    margin-right: 2em;
 }
 
 .section__back-button {
@@ -372,7 +383,7 @@ body:not(.is-section--resume) .section__resume {
     box-shadow: #bbb 1px 1px 25px;
     cursor: pointer;
     display: inline-flex;
-    position: relative;
+    position: absolute;
     top: 0;
     left: 0;
     transform: scale(0.75);
@@ -414,17 +425,19 @@ blockquote:before {
     content: "\201C";
     font-size: 3em;
     line-height: 1;
-    position: absolute;
-    left: 0.75em;
+    position: relative;
+    left: -0.5em;
 }
 
 blockquote:after {
     color: #7a7a7a;
     content: "\201D";
+    display: block;
     font-size: 3em;
     line-height: 1;
-    position: absolute;
-    right: 0.75em;
+    position: relative;
+    left: 100%;
+    margin-left: 2px;
 }
 
 footer {
@@ -511,9 +524,27 @@ footer {
     z-index: 1;
 }
 
-@media all and (max-width: 1195px) {
+@media all and (max-height: 1160px) {
     .content__sections {
-        margin: 5em 3em;
+        margin-top: 4em !important;
+        margin-bottom: 4em !important;
+    }
+}
+
+@media all and (max-height: 960px) {
+    .content__hero {
+        top: 20%;
+    }
+
+    .content__sections {
+        margin-top: 3em !important;
+        margin-bottom: 3em !important;
+    }
+}
+
+@media all and (max-width: 1120px) {
+    .content__sections {
+        margin: 5em 2em;
     }
 }
 
@@ -527,9 +558,22 @@ footer {
     }
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 560px) {
     html {
         font-size: 0.6em;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header__headine {
+        font-size: 2em;
+    }
+
+    body[class*="is-section--"] .header__headine {
+        transform: translateY(-35%);
     }
 
     .content__hero {
@@ -537,17 +581,13 @@ footer {
     }
 
     .content__sections {
-        margin: 4em 1.5em;
+        margin: 4em 1.5em !important;
     }
 
     .section__back-button {
         transform: scale(0.4);
         top: -0.4em;
         left: -0.4em;
-    }
-
-    .section {
-        margin: -2em 1em 1em 1em;
     }
 
     .section p {
@@ -575,10 +615,6 @@ footer {
 @media all and (max-width: 320px) {
     html {
         font-size: 0.5em;
-    }
-
-    .header__buttons {
-        font-size: 0.6em;
     }
 
     .section__back-button {

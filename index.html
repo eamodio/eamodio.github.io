@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="shortcut icon" href="/favicon.ico?v=2"/>
-    <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600">
 </head>
 
@@ -41,35 +41,37 @@
                 </svg>
             </div>
 
-            <section class="section section__about">
-                <h3>Hi.</h3>
-                <div class="about__image" style="background-image: url(img/me.png)"></div>
-                <p>I'm Eric Amodio. I am a entrepreneur, innovator, leader, and developer. My passion lies with dreaming up new ideas and bringing them to life through code.</p>
-                <p>When I'm not coding<sup>1</sup> or keeping up with all the latest technology, you will find me spending time with my wife, two kids, and dog. I also love traveling, hiking, camping and diving.</p>
-                <p class="footnote">
-                    <sup>1</sup> Yes, that <b>can</b> happen occasionally
-                </p>
-            </section>
+            <div class="content__sections-scroller">
+                <section class="section section__about">
+                    <h3>Hi.</h3>
+                    <div class="about__image" style="background-image: url(img/me.png)"></div>
+                    <p>I'm Eric Amodio. I am a entrepreneur, innovator, leader, and developer. My passion lies with dreaming up new ideas and bringing them to life through code.</p>
+                    <p>When I'm not coding<sup>1</sup> or keeping up with all the latest technology, you will find me spending time with my wife, two kids, and dog. I also love traveling, hiking, camping and diving.</p>
+                    <p class="footnote">
+                        <sup>1</sup> Yes, that <b>can</b> happen occasionally
+                    </p>
+                </section>
 
-            <section class="section section__gitlens">
-                <h3>GitLens.</h3>
-                <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">
-                    <div class="gitlens__image" style="background-image: url(img/gitlens.png)"></div>
-                </a>
-                <p>
-                    <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">GitLens</a> is an open-source extension for <a href="https://code.visualstudio.com">Visual Studio Code</a> that I created.
-                    It is my current passion<sup>1</sup> and is also by far my most popular open-source project. You can find the code up on <a href="https://github.com/eamodio/vscode-gitlens">GitHub</a>.
-                </p>
-                <blockquote>GitLens <b>supercharges</b> the built-in <a href="https://code.visualstudio.com">Visual Studio Code</a> Git capabilities. It helps you to <b>visualize code authorship</b> at a glance via Git blame annotations and code lens, <b>seamlessly navigate and explore</b> the history of a file or branch, <b>gain valuable insights</b> via powerful comparison commands, and so much more.</blockquote>
-                <p class="footnote">
-                    <sup>1</sup> My <i>nights and weekends</i> project, after everyone else is asleep
-                </p>
-            </section>
+                <section class="section section__gitlens">
+                    <h3>GitLens.</h3>
+                    <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">
+                        <div class="gitlens__image" style="background-image: url(img/gitlens.png)"></div>
+                    </a>
+                    <p>
+                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">GitLens</a> is an open-source extension for <a href="https://code.visualstudio.com">Visual Studio Code</a> that I created.
+                        It is my current passion<sup>1</sup> and is also by far my most popular open-source project. You can find the code up on <a href="https://github.com/eamodio/vscode-gitlens">GitHub</a>.
+                    </p>
+                    <blockquote>GitLens <b>supercharges</b> the built-in <a href="https://code.visualstudio.com">Visual Studio Code</a> Git capabilities. It helps you to <b>visualize code authorship</b> at a glance via Git blame annotations and code lens, <b>seamlessly navigate and explore</b> the history of a file or branch, <b>gain valuable insights</b> via powerful comparison commands, and so much more.</blockquote>
+                    <p class="footnote">
+                        <sup>1</sup> My <i>nights and weekends</i> project, after everyone else is asleep
+                    </p>
+                </section>
 
-            <!-- TODO -->
-            <!-- <section class="section section__resume">
-                <h3>Resume.</h3>
-            </section> -->
+                <!-- TODO -->
+                <!-- <section class="section section__resume">
+                    <h3>Resume.</h3>
+                </section> -->
+            </div>
         </div>
     </section>
 
@@ -113,18 +115,23 @@
     <!-- hero -->
     <script type="text/javascript">
         $('#subhead').typeIt({
-            cursor: false,
-            speed: 100,
+            lifeLike: true,
+            speed: 90,
             callback: function() {
+                // Remove the blinking cursor
+                $('.ti-cursor').remove();
+
                 $('#desc').typeIt({
-                    speed: 100,
+                    lifeLike: true,
+                    speed: 90,
                     callback: function() {
+                        // Remove the blinking cursor
+                        $('.ti-cursor').remove();
                         $('.on-hero-complete').removeClass('hidden');
                     }
                 })
                 .tiType('full-stack')
                 .tiBreak()
-                .tiPause(500)
                 .tiType('<span class="heart">&#10084;</span> open source');
             }
         })
