@@ -375,8 +375,8 @@ body:not(.is-section--resume) .section__resume {
 
 .section p.footnote {
     font-size: 0.3em;
-    margin-right: 2em;
-}
+    margin-top: 2em;
+    padding-top: 1em;}
 
 .section__back-button {
     border-radius: 50%;
@@ -436,8 +436,8 @@ blockquote:after {
     font-size: 3em;
     line-height: 1;
     position: relative;
-    left: 100%;
-    margin-left: 2px;
+    left: -0.5em;
+    height: 0.5em;
 }
 
 footer {
