@@ -61,6 +61,13 @@
                         <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">GitLens</a> is an open-source extension for <a href="https://code.visualstudio.com">Visual Studio Code</a> that I created.
                         It is my current passion<sup>1</sup> and is also by far my most popular open-source project. You can find the code up on <a href="https://github.com/eamodio/vscode-gitlens">GitHub</a>.
                     </p>
+                    <p class="center">
+                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens"><img src="https://vsmarketplacebadge.apphb.com/version-short/eamodio.gitlens.svg" alt="marketplace"></a>
+                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens"><img src="https://vsmarketplacebadge.apphb.com/installs-short/eamodio.gitlens.svg" alt="installs"></a>
+                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens"><img src="https://vsmarketplacebadge.apphb.com/rating-short/eamodio.gitlens.svg" alt="rating"></a>
+                        <br />
+                        <a href="https://join.slack.com/t/vscode-dev-community/shared_invite/enQtMjIxOTgxNDE3NzM0LWU5M2ZiZDU1YjBlMzdlZjA2YjBjYzRhYTM5NTgzMTAxMjdiNWU0ZmQzYWI3MWU5N2Q1YjBiYmQ4MzY0NDE1MzY"><img src="https://img.shields.io/badge/vscode--dev--community-gitlens-blue.svg?logo=slack" alt="slack"></a>
+                    </p>
                     <blockquote>GitLens <b>supercharges</b> the built-in <a href="https://code.visualstudio.com">Visual Studio Code</a> Git capabilities. It helps you to <b>visualize code authorship</b> at a glance via Git blame annotations and code lens, <b>seamlessly navigate and explore</b> the history of a file or branch, <b>gain valuable insights</b> via powerful comparison commands, and so much more.</blockquote>
                     <p class="footnote">
                         <sup>1</sup> My <i>nights and weekends</i> project, after everyone else is asleep
@@ -107,7 +114,7 @@
             </li>
         </ul>
         <span class="footer__copyright">Created by <a href="mailto:eric@amod.io">Eric Amodio</a></span>
-        <img class="footer__marvin" src="img/marvin.svg" />
+        <img class="footer__marvin" src="img/marvin.svg" alt="easter egg" />
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -205,7 +212,7 @@
     <!-- easter egg -->
     <script type="text/javascript">
         $('.footer__marvin').on('click', function() {
-            $('body').append('<img class="marvin__takeover" src="img/marvin-takeover.svg" /><audio id="kaboom" autoplay><source src="kaboom.mp3"></audio>');
+            $('body').append('<img class="marvin__takeover" src="img/marvin-takeover.svg" alt="Marvin the Martian"/><audio id="kaboom" autoplay><source src="kaboom.mp3"></audio>');
             $('.marvin__takeover').on('click', function() {
                 $('#kaboom').remove();
                 this.remove();
