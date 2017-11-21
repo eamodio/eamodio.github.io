@@ -26,8 +26,12 @@
     <section class="main">
         <div class="content__hero">
             <h1 class="hero__headine">Eric Amodio</h1>
-            <h2 id="subhead" class="hero__subhead"></h2>
-            <h2 id="desc" class="hero__desc"></h2>
+            <h2 class="hero__subhead">
+                <span id="subhead"></span>
+            </h2>
+            <h2 class="hero__desc">
+                <span id="desc"></span>
+            </h2>
             <span class="hero__button-container on-hero-complete hidden">
                 <a class="button button--flat button__about">About me</a>
             </span>
@@ -117,107 +121,171 @@
         <img class="footer__marvin" src="img/marvin.svg" alt="easter egg" />
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/4.4.1/typeit.min.js" integrity="sha256-A7ZiNuvVx7oFlrqC0E1fGYf7Re/rreauKKPZO2KkvZc=" crossorigin="anonymous"></script>
-    <!-- hero -->
-    <script type="text/javascript">
-        $('#subhead').typeIt({
-            lifeLike: true,
-            speed: 90,
-            callback: function() {
-                // Remove the blinking cursor
-                $('.ti-cursor').remove();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js" integrity="sha256-lg08cUS9fRaVhpYQy3GfoNMMXKaS63bhSXqW8MfuABw=" crossorigin="anonymous"></script>
 
-                $('#desc').typeIt({
-                    lifeLike: true,
-                    speed: 90,
-                    callback: function() {
-                        // Remove the blinking cursor
-                        $('.ti-cursor').remove();
-                        $('.on-hero-complete').removeClass('hidden');
-                    }
-                })
-                .tiType('full-stack')
-                .tiBreak()
-                .tiType('<span class="heart">&#10084;</span> open source');
+    <script type="text/javascript">
+        var listenAll = function(selector, name, fn) {
+            var els = document.querySelectorAll(selector);
+            for (var el of els) {
+                el.addEventListener(name, fn, false);
             }
-        })
-        .tiPause(500)
-        .tiDelete()
-        .tiType('entrepreneur')
-        .tiPause(1500)
-        .tiDelete()
-        .tiType('leader')
-        .tiPause(1500)
-        .tiDelete()
-        .tiType('innovator')
-        .tiPause(1500)
-        .tiDelete()
-        .tiType('architect')
-        .tiPause(1500)
-        .tiDelete()
-        .tiType('developer.')
-        .tiPause(1000);
-    </script>
-    <!-- sections -->
-    <script type="text/javascript">
-        var getOnClickFn = function(section) {
+        };
+
+        var clickFn = function(section) {
             return function() {
-                var sectionClass = 'is-section--' + section;
-                var $body = $('body');
-                if ($body.hasClass(sectionClass)) {
-                    $body.removeClass('is-section ' + sectionClass);
-
-                    document.location.hash = '';
-                    return;
-                }
-
-                if ($body.hasClass('is-section')) {
-                    $body.removeClass(function(index, className) {
-                        return (className.match(/(^|\s)is-section--\S+/g) || []).join(' ');
-                    });
-                }
-
-                $body.addClass('is-section ' + sectionClass);
-                document.location.hash = section;
+                document.location.hash = document.body.classList.contains('is-section--' + section)
+                    ? ''
+                    : section;
             };
         };
 
-        $('.button__about').on('click', getOnClickFn('about'));
-        $('.button__gitlens').on('click', getOnClickFn('gitlens'));
-        // $('.button__resume').on('click', getOnClickFn('resume'));
+        listenAll('.section__back-button', 'click', clickFn(''));
+        listenAll('.button__about', 'click', clickFn('about'));
+        listenAll('.button__gitlens', 'click', clickFn('gitlens'));
+        // listenAll('.button__resume', 'click', clickFn('resume'));
 
-        $('.section__back-button').on('click', function() {
-            $('body')
-                .removeClass('is-section')
-                .removeClass(function(index, className) {
-                    return (className.match(/(^|\s)is-section--\S+/g) || []).join(' ');
-                });
-        });
+        var typingCompleted = false;
 
-        $(function() {
-            switch (document.location.hash) {
-                case '#about':
-                case '#gitlens':
-                // case '#resume':
-                    $('body').addClass('is-section is-section--' + document.location.hash.substring(1));
+        var typingSubhead;
+        var createSubheadTyping = function() {
+            var subheads = ['entrepreneur', 'leader', 'innovator', 'architect', 'developer.'];
+            typingSubhead = new Typed('#subhead', {
+                strings: subheads,
+                autoInsertCss: false,
+                backDelay: 1500,
+                backSpeed: 30,
+                typeSpeed: 90,
+                onComplete: function() {
+                    setTimeout(function() {
+                        typingSubhead.destroy();
+                        typingSubhead = undefined;
+                        document.getElementById('subhead').innerText = subheads[subheads.length - 1];
+
+                        createDescTyping();
+                    }, 750);
+                }
+            });
+        }
+
+        var typingDesc;
+        var createDescTyping = function() {
+            var descs = ['full-stack<br /><span class="heart">&#10084;</span> open source'];
+            typingDesc = new Typed('#desc', {
+                strings: descs,
+                autoInsertCss: false,
+                backDelay: 1500,
+                backSpeed: 30,
+                typeSpeed: 90,
+                onComplete: function() {
+                    typingCompleted = true;
+
+                    var els = document.querySelectorAll('.on-hero-complete');
+                    for (var el of els) {
+                        el.classList.remove('hidden');
+                    }
+
+                    setTimeout(function() {
+                        typingDesc.destroy();
+                        typingDesc = undefined;
+                        document.getElementById('desc').innerHTML = descs[descs.length - 1];
+                    }, 1000);
+                }
+            });
+        };
+
+        var currentSection = '';
+        var switchToSection = function(section, loading) {
+            var previous = currentSection;
+
+            switch (section) {
+                case 'about':
+                case 'gitlens':
+                // case 'resume':
+                    currentSection = section;
+
+                    // Pause the typing animation if its running
+                    if (typingSubhead !== undefined || typingDesc !== undefined) {
+                        typingSubhead && typingSubhead.stop();
+                        typingDesc && typingDesc.stop();
+                    }
+
+                    var classList = document.body.classList;
+
+                    var sectionClass = 'is-section--' + section;
+                    if (classList.contains(sectionClass)) {
+                        classList.remove('is-section', sectionClass);
+                        document.location.hash = '';
+
+                        return;
+                    }
+
+                    if (classList.contains('is-section')) {
+                        classList.remove(...[...classList].filter(function(c) { return c.match(/^is-section--\S+/); }));
+                    }
+
+                    classList.add('is-section',  sectionClass);
+                    document.location.hash = section;
+
+                    break;
+
+                default:
+                    currentSection = '';
+
+                    if (!loading) {
+                        var classList = document.body.classList;
+                        classList.remove(...[...classList].filter(function(c) { return c.match(/^is-section\S*/); }));
+                        document.location.hash = '';
+                    }
+
+                    // If the typing has completed, kick out
+                    if (typingCompleted) break;
+
+                    // If the typing is paused, resume it
+                    if (typingSubhead !== undefined || typingDesc !== undefined) {
+                        setTimeout(function() {
+                            typingSubhead && typingSubhead.start();
+                            typingDesc && typingDesc.start();
+                        }, 1000);
+
+                        break;
+                    }
+
+                    // If the typing hasn't started, start it
+                    if (previous) {
+                        setTimeout(createSubheadTyping, 1000);
+                    }
+                    else {
+                        createSubheadTyping();
+                    }
+
                     break;
             }
-        });
+        }
+
+        window.addEventListener("hashchange", function() {
+            switchToSection(document.location.hash && document.location.hash.substring(1))
+        }, false);
+
+        switchToSection(document.location.hash && document.location.hash.substring(1), true);
 
         setTimeout(function() {
-            $('body').removeClass('preload');
+            document.body.classList.remove('preload');
         }, 500);
     </script>
+
     <!-- easter egg -->
     <script type="text/javascript">
-        $('.footer__marvin').on('click', function() {
-            $('body').append('<img class="marvin__takeover" src="img/marvin-takeover.svg" alt="Marvin the Martian"/><audio id="kaboom" autoplay><source src="kaboom.mp3"></audio>');
-            $('.marvin__takeover').on('click', function() {
-                $('#kaboom').remove();
-                this.remove();
-             });
-        });
+        document.querySelector('.footer__marvin')
+            .addEventListener('click', function() {
+                var template = document.createElement('template');
+                template.innerHTML = '<div class="marvin"><img class="marvin__takeover" src="img/marvin-takeover.svg" alt="Marvin the Martian"/><audio id="kaboom" autoplay><source src="kaboom.mp3"></audio></div>';
+                var el = document.body.appendChild(template.content.firstChild);
+
+                el.querySelector('.marvin__takeover')
+                    .addEventListener('click', function() {
+                        document.body.removeChild(el);
+                    }, false);
+        }, false);
     </script>
 </body>
 

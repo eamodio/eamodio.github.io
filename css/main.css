@@ -337,6 +337,8 @@ body[class*="is-section--"] .content__sections {
 .content__sections-scroller {
     overflow-x: auto;
     margin: 0.5em 0;
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
 }
 
 body:not(.is-section--about) .section__about,
@@ -392,6 +394,7 @@ body:not(.is-section--resume) .section__resume {
     top: 0;
     left: 0;
     transform: scale(0.75);
+    z-index: 1;
 }
 
 .section__back-button svg:hover circle {
@@ -527,6 +530,19 @@ footer {
     height: 100%;
     width: 100%;
     z-index: 1;
+}
+
+.typed-cursor {
+    position: absolute;
+    margin-left: 0.1em;
+    opacity: 1;
+    animation: typedjs-blink 0.7s infinite;
+    -webkit-animation: typedjs-blink 0.7s infinite;
+    animation: typedjs-blink 0.7s infinite;
+}
+
+@keyframes typedjs-blink {
+    50% { opacity: 0.0 }
 }
 
 @media all and (max-height: 1160px) {
