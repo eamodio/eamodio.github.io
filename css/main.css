@@ -217,6 +217,7 @@ body[class*="is-section--"] .header__headine {
     padding: 1em 1.75em;
     text-decoration: none;
     text-transform: uppercase;
+    user-select: none;
 }
 
 .button:focus {
