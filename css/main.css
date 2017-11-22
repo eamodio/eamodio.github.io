@@ -132,10 +132,6 @@ button:-moz-focusring,
     visibility: hidden;
 }
 
-.center {
-    text-align: center;
-}
-
 /* Normalization End */
 
 html {
@@ -421,6 +417,27 @@ body:not(.is-section--resume) .section__resume {
     width: 3em;
     height: 3em;
     margin: 0.5em auto;
+}
+
+.gitlens__badges {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.gitlens__tweet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5em;
+}
+
+p.gitlens__tweet-caption {
+    margin-top: 0;
+    font-size: 0.4em;
+}
+
+.twitter-tweet {
+    visibility: inherit !important;
 }
 
 .heart {
