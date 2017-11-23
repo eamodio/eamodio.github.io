@@ -12,6 +12,7 @@ module.exports = function(env, argv) {
     }
 
     const minify = !!env.production;
+    const prefixCss = true;
     const sourceMaps = !env.production;
 
     const plugins = [
@@ -92,9 +93,9 @@ module.exports = function(env, argv) {
                                 loader: 'postcss-loader',
                                 options: {
                                     ident: 'postcss',
-                                    plugins: [
-                                        require('autoprefixer')({ browsers: ['last 2 versions'] })
-                                    ],
+                                    plugins: prefixCss
+                                        ? [ require('autoprefixer')({ browsers: ['last 2 versions'] }) ]
+                                        : [],
                                     sourceMap: sourceMaps
                                 }
                             },
