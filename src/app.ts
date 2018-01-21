@@ -5,7 +5,7 @@ import { View } from './view';
 
 export class App {
 
-    activeView: string;
+    activeView: string = '';
 
     readonly main: MainView;
     readonly views: View[];

@@ -5,6 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = function(env, argv) {
     if (env === undefined) {
@@ -16,6 +17,8 @@ module.exports = function(env, argv) {
     const sourceMaps = !env.production;
 
     const plugins = [
+        new WriteFilePlugin(),
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new ExtractTextPlugin({
             filename: 'main.css'
         }),

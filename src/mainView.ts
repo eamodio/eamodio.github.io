@@ -88,5 +88,5 @@ export class MainView {
             typeSpeed: 90,
             onComplete: () => this.onDescTypingCompleted(strings)
         } as TypedOptions);
-    };
+    }
 }

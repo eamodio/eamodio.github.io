@@ -18,10 +18,37 @@
                 "$tsc",
                 "$tslint5"
             ],
+            "group": "build"
+        },
+        {
+            "label": "build-dev",
+            "type": "npm",
+            "script": "build-dev",
+            "problemMatcher": [
+                "$node-sass",
+                "$tsc",
+                "$tslint5"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "watch",
+            "type": "npm",
+            "script": "watch",
+            "problemMatcher": {
+				"owner": "custom",
+				"pattern": { "regexp": "__________" },
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "^webpack: Compiling\\.\\.\\.$",
+					"endsPattern": "^webpack: Compiled successfully\\.$"
+				}
+			},
+            "group": "build",
+            "isBackground": true
         }
     ]
 }

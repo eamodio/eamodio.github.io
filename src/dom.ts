@@ -6,5 +6,5 @@ export namespace DOM {
         for (const el of els) {
             el.addEventListener(name, listener, false);
         }
-    };
+    }
 }

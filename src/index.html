@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="shortcut icon" href="/favicon.ico?v=2"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110925859-1"></script>
@@ -60,13 +60,13 @@
                 </section>
 
                 <section class="section section__gitlens">
-                    <h3>GitLens.</h3>
-                    <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">
-                        <div class="gitlens__image" style="background-image: url(assets/gitlens.png)"></div>
-                    </a>
-                    <p>
-                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">GitLens</a> is an open-source extension for <a href="https://code.visualstudio.com">Visual Studio Code</a> that I created.
-                        It is my current passion<sup>1</sup> and is also by far my most popular open-source project. You can find the code up on <a href="https://github.com/eamodio/vscode-gitlens">GitHub</a>.
+                    <div class="section-header">
+                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">
+                            <img class="gitlens__image" src="assets/gitlens-logo.png" />
+                        </a>
+                    </div>
+                    <p class="section-header__blurb">
+                        GitLens <b>supercharges</b> the Git capabilities built into Visual Studio Code. It helps you to <b>visualize code authorship</b> at a glance via Git blame annotations and code lens, <b>seamlessly navigate and explore</b> Git repositories, <b>gain valuable insights</b> via powerful comparison commands, and so much more.
                     </p>
                     <p class="gitlens__badges">
                         <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens"><img src="https://vsmarketplacebadge.apphb.com/version-short/eamodio.gitlens.svg" alt="marketplace"></a>
@@ -75,14 +75,36 @@
                         <br />
                         <a href="https://join.slack.com/t/vscode-dev-community/shared_invite/enQtMjIxOTgxNDE3NzM0LWU5M2ZiZDU1YjBlMzdlZjA2YjBjYzRhYTM5NTgzMTAxMjdiNWU0ZmQzYWI3MWU5N2Q1YjBiYmQ4MzY0NDE1MzY"><img src="https://img.shields.io/badge/vscode--dev--community-gitlens-blue.svg?logo=slack" alt="slack"></a>
                     </p>
-                    <blockquote>GitLens <b>supercharges</b> the built-in <a href="https://code.visualstudio.com">Visual Studio Code</a> Git capabilities. It helps you to <b>visualize code authorship</b> at a glance via Git blame annotations and code lens, <b>seamlessly navigate and explore</b> the history of a file or branch, <b>gain valuable insights</b> via powerful comparison commands, and so much more.</blockquote>
+                    <p>
+                        <a title="Go to GitLens on the Visual Studio Marketplace" href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">GitLens</a> is a free, <a title="Go to GitLens on GitHub" href="https://github.com/eamodio/vscode-gitlens">open-source</a> extension for <a title="Go to Visual Studio Code" href="https://code.visualstudio.com">Visual Studio Code</a>.
+                    </p>
+                    <p>
+                        GitLens simply helps you understand code better. Quickly glimpse into whom, why, and when a line or code block was changed. Jump back through history to gain further insights as to how and why the code evolved. Explore the history and evolution of a codebase.
+                    </p>
                     <div class="gitlens__tweet">
-                        <blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">I have never seen such an amazing plugin for <a href="https://twitter.com/code?ref_src=twsrc%5Etfw">@code</a> as GitLens. You NEED to try this. NOW.  <a href="https://t.co/LFmrzEszZy">https://t.co/LFmrzEszZy</a> by <a href="https://twitter.com/eamodio?ref_src=twsrc%5Etfw">@eamodio</a></p>&mdash; Scott Hanselman (@shanselman) <a href="https://twitter.com/shanselman/status/908123838768078848?ref_src=twsrc%5Etfw">September 14, 2017</a></blockquote>
-                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                        <p class="gitlens__tweet-caption">❤ My favorite review</p>
+                            <blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">I have never seen such an amazing plugin for <a href="https://twitter.com/code?ref_src=twsrc%5Etfw">@code</a> as GitLens. You NEED to try this. NOW.  <a href="https://t.co/LFmrzEszZy">https://t.co/LFmrzEszZy</a> by <a href="https://twitter.com/eamodio?ref_src=twsrc%5Etfw">@eamodio</a></p>&mdash; Scott Hanselman (@shanselman) <a href="https://twitter.com/shanselman/status/908123838768078848?ref_src=twsrc%5Etfw">September 14, 2017</a></blockquote>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            <p class="gitlens__tweet-caption">❤ My favorite review</p>
                     </div>
-                    <p class="footnote">
-                        <sup>1</sup> My <i>nights and weekends</i> project, after everyone else is asleep
+                    <p>
+                        I've been building GitLens in my spare time<sup><a title="trading sleep for time">1</a></sup> for almost 2 years now.
+                        From its very humble beginnings, GitLens has grown wildly beyond my expectations — in both its reach as well as its demands on my time and attention.
+                        It is by far my most popular open-source project.
+                    </p>
+                    <p>
+                        GitLens needs help to realize its mission &mdash; making developer's lives easier, further its reach, as well as support its development.
+                    </p>
+                    <p>
+                        Here are a few ways to help &mdash; feel free to choose more than one &#x1F609;
+                    </p>
+                    <ul class="section-list">
+                        <li><a href="https://www.patreon.com/eamodio">Become a Patron</a></li>
+                        <li><a href="https://www.paypal.me/eamodio">Donate via PayPal</a></li>
+                        <li><a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens#review-details">Write a Review</a></li>
+                        <li><a href="https://github.com/eamodio/vscode-gitlens">Star or Fork me on GitHub</a></li>
+                    </ul>
+                    <p id="trading-sleep" class="footnote">
+                        <sup>1</sup> Nights and weekends, i.e. trading sleep for time
                     </p>
                 </section>
 

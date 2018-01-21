@@ -1,4 +1,8 @@
 {
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/dist": true
+    },
     "postcssSorting.config": {
         "order": [
             "custom-properties",
