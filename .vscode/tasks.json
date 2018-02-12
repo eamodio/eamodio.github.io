@@ -18,7 +18,10 @@
                 "$tsc",
                 "$tslint5"
             ],
-            "group": "build"
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "build-dev",
@@ -29,10 +32,7 @@
                 "$tsc",
                 "$tslint5"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "group": "build"
         },
         {
             "label": "watch",
