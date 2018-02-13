@@ -39,14 +39,14 @@
             "type": "npm",
             "script": "watch",
             "problemMatcher": {
-				"owner": "custom",
-				"pattern": { "regexp": "__________" },
-				"background": {
-					"activeOnStart": true,
-					"beginsPattern": "^webpack: Compiling\\.\\.\\.$",
-					"endsPattern": "^webpack: Compiled successfully\\.$"
-				}
-			},
+                "owner": "custom",
+                "pattern": { "regexp": "__________" },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^webpack: Compiling\\.\\.\\.$",
+                    "endsPattern": "^webpack: Compiled successfully\\.$"
+                }
+            },
             "group": "build",
             "isBackground": true
         }

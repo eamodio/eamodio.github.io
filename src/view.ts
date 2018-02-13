@@ -4,11 +4,11 @@ import { DOM } from './dom';
 export class View {
 
     get buttonSelector(): string {
-        return `.button__${this.name}`;
+        return `#${this.name}-button`;
     }
 
     get selector(): string {
-        return `.section--${this.name}`;
+        return `#${this.name}`;
     }
 
     constructor(public name: string) {

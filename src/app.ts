@@ -13,10 +13,13 @@ export class App {
     constructor() {
         this.main = new MainView();
 
-        this.views = [
-            new View('about'),
-            new View('gitlens')
-        ];
+        this.views = [];
+        for (const el of document.querySelectorAll<HTMLInputElement>('.section[data-view]')) {
+            const view = el.dataset.view;
+            if (view === undefined) continue;
+
+            new View(view);
+        }
 
         // Setup easter egg
         const marvin = document.querySelector('.footer__marvin')!;
@@ -37,9 +40,26 @@ export class App {
 
         const classList = document.body.classList;
         switch (view) {
-            case 'about':
-            case 'gitlens':
-            // case 'resume':
+            case '':
+                this.activeView = '';
+
+                if (!loading) {
+                    classList.remove(...[...classList].filter(function(c) { return c.match(/^is-section\S*/); }));
+                    document.location.hash = '';
+                }
+
+                // If the typing has completed, kick out
+                if (this.main.typingCompleted) break;
+
+                // If the typing is paused, resume it
+                if (this.main.resume()) break;
+
+                // If the typing hasn't started, start it
+                this.main.activate(previous);
+
+                break;
+
+            default:
                 this.activeView = view;
 
                 // Pause the typing animation if its running
@@ -59,25 +79,6 @@ export class App {
 
                 classList.add('is-section', sectionClass);
                 document.location.hash = view;
-
-                break;
-
-            default:
-                this.activeView = '';
-
-                if (!loading) {
-                    classList.remove(...[...classList].filter(function(c) { return c.match(/^is-section\S*/); }));
-                    document.location.hash = '';
-                }
-
-                // If the typing has completed, kick out
-                if (this.main.typingCompleted) break;
-
-                // If the typing is paused, resume it
-                if (this.main.resume()) break;
-
-                // If the typing hasn't started, start it
-                this.main.activate(previous);
 
                 break;
         }

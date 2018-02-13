@@ -1,5 +1,18 @@
 @import '_normalize';
 
+body:not(.is-section--about) #about,
+body:not(.is-section--gitlens) #gitlens,
+body:not(.is-section--resume) #resume {
+    display: none;
+}
+
+body.is-section--about #about-button,
+body.is-section--gitlens #gitlens-button,
+body.is-section--resume #resume-button {
+    background: white !important;
+    color: black !important;
+}
+
 html {
     box-sizing: border-box;
     color: #222;
@@ -27,13 +40,14 @@ body {
 
 a {
     border: 0;
-    color: #7319b3;
+    color: #914db3;
     font-weight: 400;
     outline: none;
     text-decoration: none;
 
-    &:hover {
-        color: #974dcb;
+    &:hover,
+    &:focus {
+        color: #ba7dd9;
     }
 }
 
@@ -76,6 +90,7 @@ a {
 .button {
     background: none;
     border: none;
+    border-radius: 3px;
     cursor: pointer;
     font-size: 0.8em;
     letter-spacing: 0.25em;
@@ -92,21 +107,58 @@ a {
 
 .button--flat {
     background: rgba(0, 0, 0, 0.2);
-    border: 2px solid white;
-    color: white;
-    transition: background-color 250ms, color 250ms;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: white !important;
+    transition: background-color 250ms, border-color 250ms, color 250ms;
 
     &:hover {
         background-color: white;
-        color: black;
+        color: black !important;
     }
 }
 
-body.is-section--about .button__about,
-body.is-section--gitlens .button__gitlens,
-body.is-section--resume .button__resume {
-    background: white;
-    color: black;
+.button--flat-inverse {
+    background-color: white;
+    border: 1px solid white;
+    color: black !important;
+    font-weight: 600;
+    transition: background-color 250ms, border-color 250ms, color 250ms;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.6);
+        color: white !important;
+    }
+}
+
+.button--flat-primary {
+    background-color: #914db3;
+    border: 1px solid #914db3;
+    color: white !important;
+    font-weight: 600;
+    transition: background-color 250ms, border-color 250ms, color 250ms;
+
+    &:hover {
+        background-color: white;
+        border-color: white;
+        color: black !important;
+    }
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.button-group--donate {
+    font-size: 0.4em;
+    justify-content: center;
+    margin: 1.5em 0 1em 0;
+
+    & .button {
+        margin: 1em 1.5em;
+        white-space: nowrap;
+    }
 }
 
 .main {
@@ -173,6 +225,7 @@ body.is-section--resume .button__resume {
     animation: fade-out 500ms ease-out;
     animation-fill-mode: forwards;
     background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.5em;
     bottom: 0;
     color: #272727;
@@ -180,8 +233,9 @@ body.is-section--resume .button__resume {
     flex-direction: column;
     font-size: 2.5em;
     left: 0;
-    margin: 5em auto;
+    margin: 3em auto;
     max-width: 960px;
+    min-height: 100px;
     position: absolute;
     right: 0;
     top: 0;
@@ -208,12 +262,6 @@ body.is-section--resume .button__resume {
     z-index: 0;
 }
 
-body:not(.is-section--about) .section__about,
-body:not(.is-section--gitlens) .section__gitlens,
-body:not(.is-section--resume) .section__resume {
-    display: none;
-}
-
 @keyframes fade-in {
     0% { opacity: 0; visibility: hidden; }
     1% { visibility: visible; }
@@ -230,6 +278,12 @@ body:not(.is-section--resume) .section__resume {
 
     & h3 {
         margin: 0;
+        text-align: center;
+    }
+
+    & h4 {
+        font-size: 0.5em;
+        margin: 1.5em 0 1em 0;
         text-align: center;
     }
 
@@ -460,31 +514,36 @@ footer {
     position: absolute;
 }
 
-@keyframes typedjs-blink {
-    50% { opacity: 0.0; }
+.center {
+    text-align: center !important;
 }
 
-@media all and (max-height: 1160px) {
-    .content__sections {
-        margin-bottom: 4em !important;
-        margin-top: 4em !important;
-    }
+
+@keyframes typedjs-blink {
+    50% { opacity: 0.0; }
 }
 
 @media all and (max-height: 960px) {
     .content__hero {
         top: 20%;
     }
+}
 
-    .content__sections {
-        margin-bottom: 3em !important;
-        margin-top: 3em !important;
+@media all and (max-height: 800px) {
+    body:not(.is-section) footer {
+        visibility: hidden;
+    }
+}
+
+@media all and (max-height: 320px) {
+    footer {
+        visibility: hidden;
     }
 }
 
 @media all and (max-width: 1120px) {
     .content__sections {
-        margin: 5em 2em;
+        margin: 3em 2em;
     }
 }
 
@@ -494,7 +553,7 @@ footer {
     }
 
     .content__sections {
-        margin: 5.5em 1.25em;
+        margin: 3em 1.25em;
     }
 }
 
@@ -522,7 +581,7 @@ footer {
     }
 
     .content__sections {
-        margin: 3.5em 0.5em !important;
+        margin: 3em 0.5em !important;
     }
 
     .section__back-button {
@@ -540,8 +599,12 @@ footer {
         margin: -0.5em 1em 1.5em 1em;
     }
 
-    .button {
+    .button--flat {
         background: none;
+    }
+
+    .button-group {
+        flex-wrap: wrap;
     }
 
     .footer {
