@@ -213,15 +213,18 @@ a {
     opacity: 1;
     position: relative;
     top: 2em;
+
+    &.hidden {
+        opacity: 0;
+    }
+}
+
+.on-section-change-fade {
     transition: opacity 750ms ease-in;
 
     body[class*="is-section--"] & {
         opacity: 0;
         transition: opacity 500ms ease-out;
-    }
-
-    &.hidden {
-        opacity: 0;
     }
 }
 
