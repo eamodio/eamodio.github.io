@@ -432,6 +432,16 @@ footer {
     display: block;
     margin: -6em 0 0 0;
     padding: 0.75em 0;
+
+    & a {
+        color: rgba(255, 255, 255, 0.4);
+        letter-spacing: 0.1em;
+        transition: color 250ms;
+
+        &:hover {
+            color: white;
+        }
+    }
 }
 
 .footer__links {
@@ -467,6 +477,17 @@ footer {
     }
 }
 
+.footer__attribution {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: .7rem;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    opacity: 0.99;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 1em;
+}
+
 .footer__copyright {
     color: rgba(255, 255, 255, 0.25);
     display: block;
@@ -476,16 +497,6 @@ footer {
     opacity: 0.99; /* no idea why this is required */
     text-align: center;
     text-transform: uppercase;
-
-    & a {
-        color: rgba(255, 255, 255, 0.4);
-        letter-spacing: 0.1em;
-        transition: color 250ms;
-
-        &:hover {
-            color: white;
-        }
-    }
 }
 
 .footer__marvin {
