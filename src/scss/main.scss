@@ -103,6 +103,7 @@ a {
     text-decoration: none;
     text-transform: uppercase;
     user-select: none;
+    white-space: nowrap;
 
     &:focus {
         outline: none;
@@ -377,6 +378,15 @@ p.section-header__blurb {
 .gitlens__badges {
     margin-bottom: 0;
     text-align: center;
+
+    & > a {
+        display: inline-block;
+        margin: 0.15em;
+
+        &:last-child {
+            display: block;
+        }
+    }
 }
 
 .gitlens__tweet {
