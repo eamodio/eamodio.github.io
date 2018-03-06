@@ -4,9 +4,24 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Eric Amodio &mdash; developer</title>
+    <title>Eric Amodio &mdash; full-stack developer</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://www.amod.io/"/>
+    <meta property="og:title" content="Eric Amodio &mdash; full-stack developer"/>
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content="http://amod.io/assets/summary.png"/>
+
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@eamodio">
+    <meta name="twitter:creator" content="@eamodio">
+    <meta name="twitter:domain" content="amod.io"/>
+    <meta name="twitter:title" content="Eric Amodio &mdash; full-stack developer"/>
+    <meta name="twitter:description" content=""/>
+    <meta name="twitter:image" content="http://amod.io/assets/summary.png"/>
+    <meta name="twitter:image:alt" content="Eric Amodio logo"/>
+    <meta name="twitter:url" content="http://www.amod.io/"/>
 
     <link rel="shortcut icon" href="/favicon.ico?v=2"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600">
@@ -20,9 +35,9 @@
     <header class="header">
         <h3 class="header__headine">Eric Amodio</h3>
         <div class="header__buttons">
-            <a class="button button--flat js-button__about">About</a>
-            <a class="button button--flat js-button__gitlens">GitLens</a>
-            <a class="button button--flat js-button__resume" href="https://linkedin.com/in/eamodio" target="_blank">Resume</a>
+            <a id="about-button" class="button button--flat js-button__about">About</a>
+            <a id="gitlens-button" class="button button--flat js-button__gitlens">GitLens</a>
+            <a id="resume-button" class="button button--flat js-button__resume" href="https://linkedin.com/in/eamodio" target="_blank">Resume</a>
         </div>
     </header>
 
@@ -69,28 +84,25 @@
                         My favorite editor is <a title="Learn more about Visual Studio Code" href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a>.
                     </p>
                     <p>
-                        When I'm not coding<sup>1</sup> or keeping up with the latest technologies, you will find me spending time with my wife, two kids, and dog. I also love traveling, hiking, camping and diving.
+                        When I'm not coding<sup><a title="Yes, that can happen occasionally">1</a></sup> or keeping up with the latest technologies, you will find me spending time with my wife, two kids, and dog. I also love traveling, hiking, camping and diving.
                     </p>
-                    <h4>Show Your Support &nbsp;&#x2764;</h4>
+                    <h4>Supporting My Work</h4>
                     <p>
                         To my incredible backers &mdash; thank you so much for your contributions.
                         I am truly humbled by your generosity and support.
                     </p>
                     <p>
-                        If you'd like to join them in supporting my work, please consider the following &mdash; feel free to choose more than one. &#x1F609;
+                        If you'd like to join them in supporting my <a href="https://github.com/eamodio" target="_blank">open-source</a> work, please consider the following &mdash; feel free to choose more than one. &#x1F609;
                     </p>
-                    <div class="button-group button-group--donate">
-                        <a class="button button--flat-primary" title="Become a patron on Patreon" href="https://www.patreon.com/eamodio" target="_blank">Become a Patron</a>
-                        <a class="button button--flat-primary" title="Donate via PayPal" href="https://www.paypal.me/eamodio" target="_blank">Donate via PayPal</a>
+                    <div class="button-group button-group--support-gitlens">
+                        <a class="button button--flat-primary" title="Become a sponsor on Patreon" href="https://www.patreon.com/eamodio" target="_blank">Become a Sponsor</a>
+                        <a class="button button--flat-primary" title="One-time donations via PayPal" href="https://www.paypal.me/eamodio" target="_blank">One-time Donations</a>
                     </div>
                     <ul class="section-list">
                         <li><a href="https://twitter.com/eamodio" target="_blank">Follow me on Twitter</a></li>
                         <li><a href="https://github.com/eamodio" target="_blank">Follow me on GitHub</a></li>
                         <li><a href="mailto:eric@amod.io" target="_blank">Hire me</a></li>
                     </ul>
-                    <p class="footnote">
-                        <sup>1</sup> Yes, that <b>can</b> happen occasionally
-                    </p>
                 </section>
 
                 <section id="gitlens" class="section" data-view="gitlens">
@@ -103,13 +115,13 @@
                         GitLens <b>supercharges</b> the Git capabilities built into Visual Studio Code. It helps you to <b>visualize code authorship</b> at a glance via Git blame annotations and code lens, <b>seamlessly navigate and explore</b> Git repositories, <b>gain valuable insights</b> via powerful comparison commands, and so much more.
                     </p>
                     <p class="gitlens__badges">
-                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank"><img src="https://vsmarketplacebadge.apphb.com/version-short/eamodio.gitlens.svg" alt="marketplace"></a>
-                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank"><img src="https://vsmarketplacebadge.apphb.com/installs-short/eamodio.gitlens.svg" alt="installs"></a>
-                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank"><img src="https://vsmarketplacebadge.apphb.com/rating-short/eamodio.gitlens.svg" alt="rating"></a>
-                        <a href="https://join.slack.com/t/vscode-dev-community/shared_invite/enQtMjIxOTgxNDE3NzM0LWU5M2ZiZDU1YjBlMzdlZjA2YjBjYzRhYTM5NTgzMTAxMjdiNWU0ZmQzYWI3MWU5N2Q1YjBiYmQ4MzY0NDE1MzY" target="_blank"><img src="https://img.shields.io/badge/vscode--dev--community-gitlens-blue.svg?logo=slack" alt="slack"></a>
+                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank"><img src="https://vsmarketplacebadge.apphb.com/version-short/eamodio.gitlens.svg?colorA=482659&amp;colorB=914db3" alt="marketplace"></a>
+                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank"><img src="https://vsmarketplacebadge.apphb.com/installs-short/eamodio.gitlens.svg?colorA=482659&amp;colorB=914db3" alt="installs"></a>
+                        <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank"><img src="https://vsmarketplacebadge.apphb.com/rating-short/eamodio.gitlens.svg?colorA=482659&amp;colorB=914db3" alt="rating"></a>
+                        <a href="https://join.slack.com/t/vscode-dev-community/shared_invite/enQtMjIxOTgxNDE3NzM0LWU5M2ZiZDU1YjBlMzdlZjA2YjBjYzRhYTM5NTgzMTAxMjdiNWU0ZmQzYWI3MWU5N2Q1YjBiYmQ4MzY0NDE1MzY" target="_blank"><img src="https://img.shields.io/badge/vscode--dev--community-gitlens-blue.svg?logo=slack&amp;colorA=482659&amp;colorB=914db3" alt="slack"></a>
                     </p>
                     <p>
-                        <a title="Learn more about GitLens" href="http://gitlens.amod.io/" target="_blank">GitLens</a> is a free, <a title="GitLens on GitHub" href="https://github.com/eamodio/vscode-gitlens" target="_blank">open-source</a> extension for <a title="Learn more about Visual Studio Code" href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a>.
+                        <a title="Learn more about GitLens" href="http://gitlens.amod.io/" target="_blank">GitLens</a> is an <a title="GitLens on GitHub" href="https://github.com/eamodio/vscode-gitlens" target="_blank">open-source</a> extension for <a title="Learn more about Visual Studio Code" href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a> I created.
                     </p>
                     <p>
                         GitLens simply helps you understand code better. Quickly glimpse into whom, why, and when a line or code block was changed. Jump back through history to gain further insights as to how and why the code evolved. Explore the history and evolution of a codebase.
@@ -128,12 +140,12 @@
                         <p class="gitlens__tweet-caption">&#x2764; My favorite review</p>
                     </div>
                     <p>
-                        Although, GitLens needs help to realize its mission of making developer's lives easier, as well as to support its continued development.
+                        GitLens is generously offered to everyone free of charge, although if you find it useful, please consider supporting it.
                     </p>
                     <p>
-                        I've been building GitLens in my spare time<sup><a title="trading sleep for time">1</a></sup> for almost 2 years now.
+                        I've been building GitLens in my spare time<sup><a title="nights and weekends, i.e. trading sleep for time">1</a></sup> for almost 2 years now.
                         From its very humble beginnings, GitLens has grown wildly beyond my expectations &mdash; in both its reach as well as its demands on my time and attention.
-                        While I would love to continue dedicating more and more of my time and attention to GitLens' development and growth, I need help.
+                        While I enjoy giving my free time and attention to GitLens' development and growth, I would like to do even more.
                     </p>
                     <h4>Show Your Support &nbsp;&#x2764;</h4>
                     <p>
@@ -144,18 +156,15 @@
                     <p>
                         If you'd like to join them in supporting GitLens, please consider the following &mdash; feel free to choose more than one. &#x1F609;
                     </p>
-                    <div class="button-group button-group--donate">
-                        <a class="button button--flat-primary" title="Become a patron on Patreon" href="https://www.patreon.com/eamodio" target="_blank">Become a Patron</a>
-                        <a class="button button--flat-primary" title="Donate via PayPal" href="https://www.paypal.me/eamodio" target="_blank">Donate via PayPal</a>
+                    <div class="button-group button-group--support-gitlens">
+                        <a class="button button--flat-primary" title="Become a sponsor on Patreon" href="https://www.patreon.com/eamodio" target="_blank">Become a Sponsor</a>
+                        <a class="button button--flat-primary" title="One-time donations via PayPal" href="https://www.paypal.me/eamodio" target="_blank">One-time Donations</a>
                     </div>
                     <ul class="section-list">
                         <li><a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens#review-details" target="_blank">Write a Review</a></li>
                         <li><a href="https://github.com/eamodio/vscode-gitlens" target="_blank">Star or Fork me on GitHub</a></li>
                         <li><a href="https://twitter.com/eamodio" target="_blank">Follow me on Twitter</a></li>
                     </ul>
-                    <p id="trading-sleep" class="footnote">
-                        <sup>1</sup> Nights and weekends, i.e. trading sleep for time
-                    </p>
                 </section>
 
                 <!-- TODO -->

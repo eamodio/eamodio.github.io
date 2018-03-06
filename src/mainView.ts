@@ -79,7 +79,7 @@ export class MainView {
     }
 
     private startDescTyping() {
-        const strings = ['full-stack<br /><span class="heart">&#10084;</span> open source'];
+        const strings = ['full-stack<br /><span class="heart">&#10084;</span> open-source'];
         this.typingDesc = new Typed('#desc', {
             strings: strings,
             autoInsertCss: false,
