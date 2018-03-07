@@ -314,12 +314,6 @@ a {
     & sup {
         font-size: 0.6em;
     }
-
-    & p.footnote {
-        font-size: 0.3em;
-        margin-top: 2em;
-        padding-top: 1em;
-    }
 }
 
 .section-header {
@@ -563,15 +557,9 @@ footer {
     50% { opacity: 0.0; }
 }
 
-@media all and (max-height: 960px) {
+@media all and (max-height: 1024px) {
     .content__hero {
         top: 20%;
-    }
-}
-
-@media all and (max-height: 800px) {
-    body:not(.is-section) footer {
-        visibility: hidden;
     }
 }
 
