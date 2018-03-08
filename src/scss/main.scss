@@ -1,9 +1,5 @@
 @import '_normalize';
 
-body.preload:not(.is-section) .content__sections {
-    visibility: hidden;
-}
-
 body:not(.is-section--about) #about,
 body:not(.is-section--gitlens) #gitlens,
 body:not(.is-section--resume) #resume {
@@ -80,7 +76,7 @@ a {
     transform-origin: top left;
     transition: transform 500ms cubic-bezier(1,.4,.7,1.5);
 
-    body[class*="is-section--"] & {
+    body.is-section & {
         transform: translateY(5%);
         transition-delay: 600ms;
     }
@@ -121,7 +117,7 @@ a {
         color: black !important;
     }
 
-    .preload & {
+    body.preload & {
         transition-duration: 0s !important;
     }
 }
@@ -139,7 +135,7 @@ a {
         color: white !important;
     }
 
-    .preload & {
+    body.preload & {
         transition-duration: 0s !important;
     }
 }
@@ -157,7 +153,7 @@ a {
         color: black !important;
     }
 
-    .preload & {
+    body.preload & {
         transition-duration: 0s !important;
     }
 }
@@ -184,7 +180,7 @@ a {
     position: relative;
 }
 
-.content__hero {
+.hero {
     bottom: 0;
     color: white;
     font-size: 2.5em;
@@ -195,7 +191,7 @@ a {
     top: 30%;
     transition: transform 1s cubic-bezier(.01,.3,.75,-1);
 
-    body[class*="is-section--"] & {
+    body.is-section & {
         transform: translateX(-100%);
     }
 }
@@ -235,15 +231,15 @@ a {
 .on-section-change-fade {
     transition: opacity 750ms ease-in;
 
-    body[class*="is-section--"] & {
+    body.is-section & {
         opacity: 0;
         transition: opacity 500ms ease-out;
     }
 }
 
-.content__sections {
+.sections {
     animation: fade-out 500ms ease-out;
-    animation-fill-mode: forwards;
+    animation-fill-mode: both;
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.5em;
@@ -261,21 +257,22 @@ a {
     top: 0;
     transform: scale(.90);
     transition: transform 500ms cubic-bezier(.8,-0.5,.2,1.5);
+    visibility: hidden;
 
-    body[class*="is-section--"] & {
+    body.is-section & {
         animation: fade-in 500ms 750ms ease-in;
-        animation-fill-mode: forwards;
+        animation-fill-mode: both;
         transform: scale(1);
         transition-delay: 600ms;
-        visibility: hidden;
     }
 
-    .preload & {
-        animation-duration: 0s !important;
+    body.preload & {
+        // Move it off screen so the animation can run, but we don't see the flash
+        left: -200%;
     }
 }
 
-.content__sections-scroller {
+.sections__scroller {
     margin: 0.5em 0;
     -webkit-overflow-scrolling: touch;
     overflow-x: auto;
@@ -558,7 +555,7 @@ footer {
 }
 
 @media all and (max-height: 1024px) {
-    .content__hero {
+    .hero {
         top: 20%;
     }
 }
@@ -570,7 +567,7 @@ footer {
 }
 
 @media all and (max-width: 1120px) {
-    .content__sections {
+    .sections {
         margin: 3em 2em;
     }
 }
@@ -580,7 +577,7 @@ footer {
         font-size: 0.9em;
     }
 
-    .content__sections {
+    .sections {
         margin: 3em 1.25em;
     }
 }
@@ -598,17 +595,17 @@ footer {
     .header__headine {
         font-size: 2em;
 
-        body[class*="is-section--"] & {
+        body.is-section & {
             transform: translateY(-35%);
         }
     }
 
-    .content__hero {
+    .hero {
         font-size: 2em;
         top: 25%;
     }
 
-    .content__sections {
+    .sections {
         margin: 3em 0.5em !important;
     }
 

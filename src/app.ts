@@ -32,7 +32,7 @@ export class App {
 
         setTimeout(() => {
             document.body.classList.remove('preload');
-        }, 500);
+        }, 750); // Wait for the length of the fade-out animation
     }
 
     switchView(view: string, loading: boolean = false) {
