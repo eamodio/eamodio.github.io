@@ -324,12 +324,21 @@ a {
         text-align: center;
     }
 
+    & h5 {
+        font-size: 0.45em;
+        margin: 1.5em 0 0 0;
+    }
+
     & p {
         font-size: 0.45em;
     }
 
     & sup {
         font-size: 0.6em;
+    }
+
+    & p.sponsors {
+        font-size: 0.3em;
     }
 }
 
