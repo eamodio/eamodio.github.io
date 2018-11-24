@@ -1,42 +1,47 @@
 {
-  "name": "amod.io",
-  "version": "0.0.1",
-  "description": "",
-  "repository": {
-    "url": "https://github.com/eamodio/eamodio.github.io",
-    "type": "git"
-  },
-  "private": true,
-  "author": "Eric Amodio",
-  "license": "",
-  "engines": {
-    "node": ">= 6.11.0"
-  },
-  "scripts": {
-    "build": "webpack --env.production",
-    "build-dev": "webpack",
-    "watch": "webpack-dev-server"
-  },
-  "devDependencies": {
-    "@types/node": "10.3.4",
-    "@types/webpack": "4.4.1",
-    "autoprefixer": "8.6.3",
-    "css-loader": "0.28.11",
-    "html-webpack-inline-source-plugin": "0.0.10",
-    "html-webpack-plugin": "3.2.0",
-    "node-sass": "4.9.0",
-    "mini-css-extract-plugin": "0.4.0",
-    "postcss-loader": "2.1.5",
-    "sass-loader": "7.0.3",
-    "style-loader": "0.21.0",
-    "ts-loader": "4.4.1",
-    "tslint": "5.10.0",
-    "typed.js": "2.0.8",
-    "typescript": "2.9.2",
-    "uglifyjs-webpack-plugin": "1.2.5",
-    "webpack": "4.12.0",
-    "webpack-cli": "3.0.8",
-    "webpack-dev-server": "3.1.4",
-    "write-file-webpack-plugin": "4.3.2"
-  }
+    "name": "amod.io",
+    "version": "0.0.1",
+    "description": "",
+    "repository": {
+        "url": "https://github.com/eamodio/eamodio.github.io",
+        "type": "git"
+    },
+    "private": true,
+    "author": "Eric Amodio",
+    "license": "",
+    "engines": {
+        "node": ">= 6.11.0"
+    },
+    "scripts": {
+        "build": "webpack --env.development",
+        "bundle": "webpack --env.production",
+        "pretty": "prettier --config .prettierrc --loglevel warn --write \"./**/*.{ts,md,json}\" && tslint --project tsconfig.json --fix",
+        "watch": "webpack-dev-server"
+    },
+    "devDependencies": {
+        "@types/node": "8.10.38",
+        "@types/webpack": "4.4.19",
+        "autoprefixer": "9.3.1",
+        "css-loader": "1.0.1",
+        "html-webpack-inline-source-plugin": "0.0.10",
+        "html-webpack-plugin": "3.2.0",
+        "mini-css-extract-plugin": "0.4.5",
+        "node-sass": "4.10.0",
+        "postcss-loader": "3.0.0",
+        "prettier": "1.15.2",
+        "prettier-tslint": "0.4.0",
+        "sass-loader": "7.1.0",
+        "style-loader": "0.23.1",
+        "terser-webpack-plugin": "1.1.0",
+        "tslint": "5.11.0",
+        "tslint-loader": "3.5.4",
+        "tslint-prettiest": "0.0.1",
+        "ts-loader": "5.3.0",
+        "typed.js": "2.0.9",
+        "typescript": "3.1.6",
+        "webpack": "4.26.0",
+        "webpack-cli": "3.1.2",
+        "webpack-dev-server": "3.1.10",
+        "write-file-webpack-plugin": "4.5.0"
+    }
 }

@@ -1,10 +1,9 @@
-'use strict'
+'use strict';
 import { DOM } from './dom';
 import { MainView } from './mainView';
 import { View } from './view';
 
 export class App {
-
     activeView: string = '';
 
     readonly main: MainView;
@@ -26,9 +25,9 @@ export class App {
         marvin.addEventListener('click', this.onMarvinClicked.bind(this), false);
 
         DOM.listenAll('.section__back-button', 'click', this.onBackButtonClicked.bind(this));
-        window.addEventListener("hashchange", this.onHashChanged.bind(this), false);
+        window.addEventListener('hashchange', this.onHashChanged.bind(this), false);
 
-        this.switchView(document.location.hash && document.location.hash.substring(1), true);
+        this.switchView(document.location!.hash && document.location!.hash.substring(1), true);
 
         setTimeout(() => {
             document.body.classList.remove('preload');
@@ -44,8 +43,12 @@ export class App {
                 this.activeView = '';
 
                 if (!loading) {
-                    classList.remove(...[...classList].filter(function(c) { return c.match(/^is-section\S*/); }));
-                    document.location.hash = '';
+                    classList.remove(
+                        ...[...classList].filter(function(c) {
+                            return c.match(/^is-section\S*/);
+                        })
+                    );
+                    document.location!.hash = '';
                 }
 
                 // If the typing has completed, kick out
@@ -68,33 +71,38 @@ export class App {
                 const sectionClass = `is-section--${view}`;
                 if (classList.contains(sectionClass)) {
                     classList.remove('is-section', sectionClass);
-                    document.location.hash = '';
+                    document.location!.hash = '';
 
                     return;
                 }
 
                 if (classList.contains('is-section')) {
-                    classList.remove(...[...classList].filter(function(c) { return c.match(/^is-section--\S+/); }));
+                    classList.remove(
+                        ...[...classList].filter(function(c) {
+                            return c.match(/^is-section--\S+/);
+                        })
+                    );
                 }
 
                 classList.add('is-section', sectionClass);
-                document.location.hash = view;
+                document.location!.hash = view;
 
                 break;
         }
     }
 
     private onBackButtonClicked(e: MouseEvent) {
-        document.location.hash = '';
+        document.location!.hash = '';
     }
 
     private onHashChanged(e: HashChangeEvent) {
-        this.switchView(document.location.hash && document.location.hash.substring(1));
+        this.switchView(document.location!.hash && document.location!.hash.substring(1));
     }
 
     private onMarvinClicked(e: MouseEvent) {
         const template = document.createElement('template');
-        template.innerHTML = '<div class="marvin"><img class="marvin__takeover" src="assets/marvin-takeover.svg" alt="Marvin the Martian"/><audio id="kaboom" autoplay><source src="assets/kaboom.mp3"></audio></div>';
+        template.innerHTML =
+            '<div class="marvin"><img class="marvin__takeover" src="assets/marvin-takeover.svg" alt="Marvin the Martian"/><audio id="kaboom" autoplay><source src="assets/kaboom.mp3"></audio></div>';
         const el = document.body.appendChild(template.content.firstChild!) as HTMLElement;
 
         const takeover = el.querySelector('.marvin__takeover')!;

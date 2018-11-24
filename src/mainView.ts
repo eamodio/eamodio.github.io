@@ -1,8 +1,7 @@
-'use strict'
+'use strict';
 import Typed, { TypedOptions } from 'typed.js';
 
 export class MainView {
-
     typingCompleted = false;
 
     private typingSubhead: Typed | undefined;

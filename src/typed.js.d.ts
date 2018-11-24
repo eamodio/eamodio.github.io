@@ -20,16 +20,16 @@ export interface TypedOptions {
     attr?: string;
     bindInputFocusEvents?: boolean;
     contentType?: string;
-    onComplete?: () => void;
-    preStringTyped?: (arrayPos: number) => void;
-    onStringTyped?: (arrayPos: number) => void;
-    onLastStringBackspaced?: () => void;
-    onTypingPaused?: (arrayPos: number) => void;
-    onTypingResumed?: (arrayPos: number) => void;
-    onReset?: (arrayPos: number) => void;
-    onStop?: () => void;
-    onStart?: () => void;
-    onDestroy?: () => void;
+    onComplete?(): void;
+    preStringTyped?(arrayPos: number): void;
+    onStringTyped?(arrayPos: number): void;
+    onLastStringBackspaced?(): void;
+    onTypingPaused?(arrayPos: number): void;
+    onTypingResumed?(arrayPos: number): void;
+    onReset?(arrayPos: number): void;
+    onStop?(): void;
+    onStart?(): void;
+    onDestroy?(): void;
 }
 
 export default class Typed {
@@ -39,5 +39,5 @@ export default class Typed {
     stop(): void;
     start(): void;
     destroy(): void;
-    reset(restart: boolean = true): void;
+    reset(restart: boolean): void;
 }

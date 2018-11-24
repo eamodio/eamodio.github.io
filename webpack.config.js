@@ -1,95 +1,93 @@
 'use strict';
-const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const HtmlInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = function(env, argv) {
-    if (env === undefined) {
-        env = {};
-    }
-
-    const production = !!env.production;
-
-    const minify = production;
-    const prefixCss = true;
-    const sourceMaps = !production;
+    env = env || {};
+    env.production = Boolean(env.production);
+    env.prefixCss = true;
 
     const plugins = [
         new WriteFilePlugin(),
-        new webpack.optimize.ModuleConcatenationPlugin(),
         new MiniCssExtractPlugin({
             filename: 'main.css'
         }),
-        new HtmlWebpackPlugin({
+        new HtmlPlugin({
             template: 'src/index.html',
             filename: path.resolve(__dirname, 'index.html'),
             inject: true,
-            inlineSource: production ? '.(js|css)$' : undefined,
-            minify: minify
+            inlineSource: env.production ? '.(js|css)$' : undefined,
+            minify: env.production
                 ? {
-                    removeComments: true,
-                    collapseWhitespace: true,
-                    removeRedundantAttributes: true,
-                    useShortDoctype: true,
-                    removeEmptyAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    keepClosingSlash: true
-                }
+                      removeComments: true,
+                      collapseWhitespace: true,
+                      removeRedundantAttributes: true,
+                      useShortDoctype: true,
+                      removeEmptyAttributes: true,
+                      removeStyleLinkTypeAttributes: true,
+                      keepClosingSlash: true,
+                      minifyCSS: true,
+                      minifyJS: true
+                  }
                 : false
         }),
-        new HtmlWebpackInlineSourcePlugin(),
-        new UglifyJsPlugin({
-            parallel: true,
-            sourceMap: sourceMaps,
-            uglifyOptions: {
-                ecma: 5,
-                compress: minify,
-                mangle: minify,
-                output: {
-                    beautify: !minify,
-                    comments: false,
-                    ecma: 5
-                }
-            }
-        })
+        new HtmlInlineSourcePlugin()
     ];
 
     return {
-        entry: [ './src/index.ts', './src/scss/main.scss' ],
-        mode: production ? 'production' : 'development',
+        entry: ['./src/index.ts', './src/scss/main.scss'],
+        mode: env.production ? 'production' : 'development',
         output: {
             filename: '[name].js',
             path: path.resolve(__dirname, 'dist'),
             publicPath: '/dist/'
         },
         optimization: {
+            minimizer: [
+                new TerserPlugin({
+                    parallel: true,
+                    sourceMap: !env.production,
+                    terserOptions: {
+                        ecma: 5,
+                        compress: env.production,
+                        mangle: env.production,
+                        output: {
+                            beautify: !env.production,
+                            comments: false,
+                            ecma: 5
+                        }
+                    }
+                })
+            ],
             splitChunks: {
-              cacheGroups: {
-                styles: {
-                  name: 'styles',
-                  test: /\.css$/,
-                  chunks: 'all',
-                  enforce: true
+                cacheGroups: {
+                    styles: {
+                        name: 'styles',
+                        test: /\.css$/,
+                        chunks: 'all',
+                        enforce: true
+                    }
                 }
-              }
             }
         },
-        resolve: {
-            extensions: ['.ts', '.js'],
-            modules: [path.resolve(__dirname, 'src'), 'node_modules']
-        },
         externals: {
-            'typed.js': 'Typed'
+            'typed.js': 'Typed',
+            document: 'document'
         },
-        devtool: sourceMaps ? 'eval-source-map' : false,
         module: {
             rules: [
                 {
                     test: /\.ts$/,
+                    enforce: 'pre',
+                    use: 'tslint-loader',
+                    exclude: /node_modules/
+                },
+                {
+                    test: /\.tsx?$/,
                     use: 'ts-loader',
                     exclude: /node_modules/
                 },
@@ -102,8 +100,7 @@ module.exports = function(env, argv) {
                         {
                             loader: 'css-loader',
                             options: {
-                                minimize: minify,
-                                sourceMap: sourceMaps,
+                                sourceMap: !env.production,
                                 url: false
                             }
                         },
@@ -111,16 +108,16 @@ module.exports = function(env, argv) {
                             loader: 'postcss-loader',
                             options: {
                                 ident: 'postcss',
-                                plugins: prefixCss
-                                    ? [ require('autoprefixer')({ browsers: ['last 2 versions'] }) ]
+                                plugins: env.prefixCss
+                                    ? [require('autoprefixer')({ browsers: ['last 2 versions'] })]
                                     : [],
-                                sourceMap: sourceMaps
+                                sourceMap: !env.production
                             }
                         },
                         {
                             loader: 'sass-loader',
                             options: {
-                                sourceMap: sourceMaps
+                                sourceMap: !env.production
                             }
                         }
                     ],
@@ -128,6 +125,19 @@ module.exports = function(env, argv) {
                 }
             ]
         },
-        plugins: plugins
+        resolve: {
+            extensions: ['.ts', '.js'],
+            modules: [path.resolve(__dirname, 'src'), 'node_modules']
+        },
+        plugins: plugins,
+        stats: {
+            all: false,
+            assets: true,
+            builtAt: true,
+            env: true,
+            errors: true,
+            timings: true,
+            warnings: true
+        }
     };
 };
