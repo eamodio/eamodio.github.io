@@ -162,7 +162,11 @@ a {
 
 .button-group {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+
+    & .button {
+        white-space: nowrap;
+    }
 }
 
 .button-group--support-gitlens {
