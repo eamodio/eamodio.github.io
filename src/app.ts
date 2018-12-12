@@ -22,7 +22,7 @@ export class App {
 
         // Setup easter egg
         const marvin = document.querySelector('.footer__marvin')!;
-        marvin.addEventListener('click', this.onMarvinClicked.bind(this), false);
+        marvin.addEventListener('click', this.onMarvinClicked.bind(this) as (this: Element, ev: Event) => any, false);
 
         DOM.listenAll('.section__back-button', 'click', this.onBackButtonClicked.bind(this));
         window.addEventListener('hashchange', this.onHashChanged.bind(this), false);
