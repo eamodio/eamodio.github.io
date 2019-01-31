@@ -47,6 +47,7 @@ module.exports = function(env, argv) {
     return {
         entry: ['./src/index.ts', './src/scss/main.scss'],
         mode: env.production ? 'production' : 'development',
+        devtool: 'source-map',
         output: {
             filename: '[name].js',
             path: path.resolve(__dirname, 'dist'),
@@ -56,7 +57,7 @@ module.exports = function(env, argv) {
             minimizer: [
                 new TerserPlugin({
                     parallel: true,
-                    sourceMap: !env.production,
+                    sourceMap: true, //!env.production,
                     terserOptions: {
                         ecma: 6,
                         compress: env.production,
@@ -105,7 +106,7 @@ module.exports = function(env, argv) {
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: !env.production,
+                                sourceMap: true, //!env.production,
                                 url: false
                             }
                         },
@@ -116,13 +117,13 @@ module.exports = function(env, argv) {
                                 plugins: env.prefixCss
                                     ? [require('autoprefixer')({ browsers: ['last 2 versions'] })]
                                     : [],
-                                sourceMap: !env.production
+                                sourceMap: true //!env.production
                             }
                         },
                         {
                             loader: 'sass-loader',
                             options: {
-                                sourceMap: !env.production
+                                sourceMap: true //!env.production
                             }
                         }
                     ],
