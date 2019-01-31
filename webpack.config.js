@@ -57,7 +57,7 @@ module.exports = function(env, argv) {
             minimizer: [
                 new TerserPlugin({
                     parallel: true,
-                    sourceMap: true, //!env.production,
+                    sourceMap: true,
                     terserOptions: {
                         ecma: 6,
                         compress: env.production,
@@ -106,7 +106,7 @@ module.exports = function(env, argv) {
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: true, //!env.production,
+                                sourceMap: true,
                                 url: false
                             }
                         },
@@ -117,13 +117,13 @@ module.exports = function(env, argv) {
                                 plugins: env.prefixCss
                                     ? [require('autoprefixer')({ browsers: ['last 2 versions'] })]
                                     : [],
-                                sourceMap: true //!env.production
+                                sourceMap: true
                             }
                         },
                         {
                             loader: 'sass-loader',
                             options: {
-                                sourceMap: true //!env.production
+                                sourceMap: true
                             }
                         }
                     ],
