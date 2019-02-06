@@ -20,7 +20,7 @@ module.exports = function(env, argv) {
         }),
         new PurgecssPlugin({
             paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true }),
-            whitelistPatterns: [/typed-.*/]
+            whitelistPatterns: [/is-section--.*/, /typed-.*/]
         }),
         new HtmlPlugin({
             template: 'src/index.html',

@@ -124,6 +124,12 @@ body:not(.is-section--gitlens) #gitlens,
 body:not(.is-section--resume) #resume {
   display: none; }
 
+body.is-section--about #about-button,
+body.is-section--gitlens #gitlens-button,
+body.is-section--resume #resume-button {
+  background: white !important;
+  color: black !important; }
+
 html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
