@@ -56,6 +56,7 @@ module.exports = function(env, argv) {
         optimization: {
             minimizer: [
                 new TerserPlugin({
+                    cache: true,
                     parallel: true,
                     sourceMap: true,
                     terserOptions: {
@@ -81,21 +82,29 @@ module.exports = function(env, argv) {
                 }
             }
         },
-        externals: {
-            document: 'document'
-        },
+        // externals: {
+        //     document: 'document'
+        // },
         module: {
             rules: [
                 {
                     test: /\.ts$/,
                     enforce: 'pre',
-                    use: 'tslint-loader',
+                    use: [
+                        {
+                            loader: 'eslint-loader',
+                            options: {
+                                cache: true,
+                                failOnError: true
+                            }
+                        }
+                    ],
                     exclude: /node_modules/
                 },
                 {
                     test: /\.tsx?$/,
                     use: 'ts-loader',
-                    exclude: /node_modules/
+                    exclude: /node_modules|\.d\.ts$/
                 },
                 {
                     test: /\.scss$/,
@@ -132,7 +141,7 @@ module.exports = function(env, argv) {
             ]
         },
         resolve: {
-            extensions: ['.ts', '.js'],
+            extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
             modules: [path.resolve(__dirname, 'src'), 'node_modules']
         },
         plugins: plugins,

@@ -1,4 +1,5 @@
 'use strict';
+/*global window document*/
 import { DOM } from './dom';
 import { MainView } from './mainView';
 import { View } from './view';
@@ -17,7 +18,7 @@ export class App {
             const view = el.dataset.view;
             if (view === undefined) continue;
 
-            new View(view);
+            this.views.push(new View(view));
         }
 
         // Setup easter egg
@@ -39,12 +40,12 @@ export class App {
 
         const classList = document.body.classList;
         switch (view) {
-            case '':
+            case '': {
                 this.activeView = '';
 
                 if (!loading) {
                     classList.remove(
-                        ...[...classList].filter(function(c) {
+                        ...[...classList].filter(c => {
                             return c.match(/^is-section\S*/);
                         })
                     );
@@ -61,8 +62,13 @@ export class App {
                 this.main.activate(previous);
 
                 break;
+            }
+            default: {
+                if (!this.views.some(v => v.name === view)) {
+                    this.switchView('', false);
+                    return;
+                }
 
-            default:
                 this.activeView = view;
 
                 // Pause the typing animation if its running
@@ -78,7 +84,7 @@ export class App {
 
                 if (classList.contains('is-section')) {
                     classList.remove(
-                        ...[...classList].filter(function(c) {
+                        ...[...classList].filter(c => {
                             return c.match(/^is-section--\S+/);
                         })
                     );
@@ -88,6 +94,7 @@ export class App {
                 document.location!.hash = view;
 
                 break;
+            }
         }
     }
 

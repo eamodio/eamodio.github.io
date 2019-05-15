@@ -1,4 +1,5 @@
 'use strict';
+/*global document*/
 import Typed, { TypedOptions } from 'typed.js';
 
 export class MainView {
@@ -67,25 +68,27 @@ export class MainView {
 
     private startSubheadTyping() {
         const strings = ['entrepreneur', 'leader', 'innovator', 'architect', 'developer.'];
-        this.typingSubhead = new Typed('#subhead', {
+        const opts: TypedOptions = {
             strings: strings,
             autoInsertCss: false,
             backDelay: 1500,
             backSpeed: 30,
             typeSpeed: 90,
             onComplete: () => this.onSubheadTypingCompleted(strings)
-        } as TypedOptions);
+        };
+        this.typingSubhead = new Typed('#subhead', opts);
     }
 
     private startDescTyping() {
         const strings = ['full-stack<br /><span class="heart">&#10084;</span> open-source'];
-        this.typingDesc = new Typed('#desc', {
+        const opts: TypedOptions = {
             strings: strings,
             autoInsertCss: false,
             backDelay: 1500,
             backSpeed: 30,
             typeSpeed: 90,
             onComplete: () => this.onDescTypingCompleted(strings)
-        } as TypedOptions);
+        };
+        this.typingDesc = new Typed('#desc', opts);
     }
 }
