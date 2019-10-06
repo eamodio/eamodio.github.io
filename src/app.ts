@@ -5,7 +5,7 @@ import { MainView } from './mainView';
 import { View } from './view';
 
 export class App {
-    activeView: string = '';
+    activeView = '';
 
     readonly main: MainView;
     readonly views: View[];
@@ -35,7 +35,7 @@ export class App {
         }, 750); // Wait for the length of the fade-out animation
     }
 
-    switchView(view: string, loading: boolean = false) {
+    switchView(view: string, loading = false) {
         const previous = this.activeView;
 
         const classList = document.body.classList;
