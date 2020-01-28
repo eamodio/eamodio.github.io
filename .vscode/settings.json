@@ -1,5 +1,4 @@
 {
-	"editor.insertSpaces": true,
 	"eslint.packageManager": "yarn",
 	"files.associations": {
 		".eslintrc.json": "jsonc"

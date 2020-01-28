@@ -126,6 +126,10 @@ a {
 	&:hover {
 		background-color: white;
 		color: black !important;
+
+		& .button__icon--svg {
+			filter: invert(100%);
+		}
 	}
 
 	body.preload & {
@@ -145,6 +149,14 @@ a {
 		background: rgba(0, 0, 0, 0.2);
 		border-color: rgba(255, 255, 255, 0.6);
 		color: white !important;
+
+		& .button__icon--svg {
+			filter: invert(0%);
+		}
+	}
+
+	& .button__icon--svg {
+		filter: invert(100%);
 	}
 
 	body.preload & {
@@ -163,6 +175,10 @@ a {
 		background-color: white;
 		border-color: white;
 		color: black !important;
+
+		& .button__icon--svg {
+			filter: invert(100%);
+		}
 	}
 
 	body.preload & {
@@ -181,6 +197,10 @@ a {
 		background-color: white;
 		border-color: white;
 		color: black !important;
+
+		& .button__icon--svg {
+			filter: invert(100%);
+		}
 	}
 
 	body.preload & {
@@ -217,6 +237,11 @@ a {
 		margin: 1em 1.5em;
 		white-space: nowrap;
 	}
+}
+
+.button-group--cta-left {
+	float: right;
+	margin: 0.5em -1em -1em -1em;
 }
 
 .main {
@@ -365,6 +390,12 @@ a {
 				color: inherit;
 			}
 		}
+
+		&.subhead {
+			font-size: smaller;
+			margin: 0;
+			text-align: left;
+		}
 	}
 
 	& h4 {
@@ -442,6 +473,16 @@ p.section-header__blurb {
 	box-shadow: black 1px 1px 25px;
 	height: 3em;
 	margin: 0.5em auto;
+	width: 3em;
+}
+
+.sponsor-me__image {
+	background-size: cover;
+	border-radius: 50%;
+	box-shadow: black 1px 1px 25px;
+	height: 3em;
+	margin: 1em 1em 0.5em 0.5em;
+	float: left;
 	width: 3em;
 }
 
@@ -651,6 +692,10 @@ img.center {
 	margin-top: 0 !important;
 }
 
+.mt-1 {
+	margin-top: 1em !important;
+}
+
 @keyframes typedjs-blink {
 	50% {
 		opacity: 0;
@@ -713,7 +758,8 @@ img.center {
 	}
 
 	.header__buttons {
-		transform: translateY(-5px);
+		transform: translateY(0);
+		font-size: 0.8em;
 	}
 
 	.header__headine {
@@ -754,6 +800,15 @@ img.center {
 
 	.button-group {
 		flex-wrap: wrap;
+	}
+
+	.button-group--cta-left {
+		font-size: 0.5em;
+
+		.button {
+			margin: 1em 1em 0 0;
+			padding: 1em;
+		}
 	}
 
 	.footer {

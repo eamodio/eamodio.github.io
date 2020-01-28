@@ -4,6 +4,8 @@ import { DOM } from './dom';
 import { MainView } from './mainView';
 import { View } from './view';
 
+const sectionRegex = /^is-section\S*/;
+
 export class App {
 	activeView = '';
 
@@ -44,7 +46,7 @@ export class App {
 				this.activeView = '';
 
 				if (!loading) {
-					classList.remove(...[...classList].filter(c => /^is-section\S*/.test(c)));
+					classList.remove(...[...classList].filter(c => sectionRegex.test(c)));
 					document.location.hash = '';
 				}
 
@@ -79,7 +81,7 @@ export class App {
 				}
 
 				if (classList.contains('is-section')) {
-					classList.remove(...[...classList].filter(c => /^is-section--\S+/.test(c)));
+					classList.remove(...[...classList].filter(c => sectionRegex.test(c)));
 				}
 
 				classList.add('is-section', sectionClass);
