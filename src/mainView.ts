@@ -53,7 +53,7 @@ export class MainView {
 	private onDescTypingCompleted(strings: string[]) {
 		this.typingCompleted = true;
 
-		const els = document.querySelectorAll('.js-on-hero-complete')!;
+		const els = document.querySelectorAll('[data-target="hero-button"]')!;
 		for (const el of els) {
 			el.classList.remove('hidden');
 		}

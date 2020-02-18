@@ -23,7 +23,7 @@ module.exports = function(env, argv) {
 			whitelistPatterns: [/is-section--.*/, /typed-.*/]
 		}),
 		new HtmlPlugin({
-			template: 'src/index.html',
+			template: 'src/index.ejs',
 			filename: path.resolve(__dirname, 'index.html'),
 			inject: true,
 			inlineSource: env.production ? '.(js|css)$' : undefined,
@@ -132,6 +132,10 @@ module.exports = function(env, argv) {
 							}
 						}
 					]
+				},
+				{
+					test: /\.ejs$/,
+					loader: 'ejs-loader'
 				}
 			]
 		},

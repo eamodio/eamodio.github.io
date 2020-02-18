@@ -3,31 +3,39 @@
 import { DOM } from './dom';
 
 export class View {
-	get buttonSelector(): string {
-		return `.js-button__${this.name}`;
+	constructor(public name: string) {
+		DOM.listenAll(`[data-action="${this.name}"]`, 'click', this.onButtonClicked.bind(this));
 	}
 
-	get selector(): string {
+	get hash(): string {
 		return `#${this.name}`;
 	}
 
-	constructor(public name: string) {
-		DOM.listenAll(this.buttonSelector, 'click', this.onButtonClicked.bind(this));
-	}
-
-	activate() {
-		document.location.hash = this.name;
+	activate(paths?: string[]) {
+		// console.log(`View(${this.name}).activate`);
 	}
 
 	deactivate() {
-		document.location.hash = '';
+		// console.log(`View(${this.name}).deactivate`);
+	}
+
+	protected getHash(path?: string): string {
+		return `${this.hash}${!path ? '' : `${path.startsWith('/') ? path : `/${path}`}`}`.toLowerCase();
+	}
+
+	protected matchesPath(path?: string): boolean {
+		return document.location.hash?.toLowerCase() === this.getHash(path);
+	}
+
+	protected setPath(path?: string) {
+		document.location.hash = this.getHash(path);
 	}
 
 	private onButtonClicked(e: MouseEvent) {
-		if (document.body.classList.contains(`is-section--${this.name}`)) {
-			this.deactivate();
+		if (document.location.hash?.startsWith(this.hash)) {
+			document.location.hash = '';
 		} else {
-			this.activate();
+			this.setPath();
 		}
 	}
 }
