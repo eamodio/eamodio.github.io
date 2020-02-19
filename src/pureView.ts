@@ -25,6 +25,7 @@ export class PureView extends View {
 		super(name);
 
 		DOM.listen(document.body, 'click', this.onBodyClicked.bind(this));
+		DOM.listenAll('[data-action="pure-donate-close-button"]', 'click', this.onCloseButtonClicked.bind(this));
 		DOM.listenAll('[data-action="pure-donate-button"]', 'click', this.onDonateButtonClicked.bind(this));
 		DOM.listenAll('[data-action="pure-tier"]', 'click', this.onTierClicked.bind(this));
 		DOM.listenAll('[data-action="watch-toggle"]', 'click', this.onWatchClicked.bind(this));
@@ -76,6 +77,10 @@ export class PureView extends View {
 
 	private onBodyClicked(e: MouseEvent) {
 		DOM.$('[data-action="watch-toggle"]')[0]?.classList.remove('expand');
+	}
+
+	private onCloseButtonClicked(e: MouseEvent) {
+		this.setPath('/donate');
 	}
 
 	private onDonateButtonClicked(e: MouseEvent) {

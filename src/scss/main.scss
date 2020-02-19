@@ -738,7 +738,7 @@ footer {
 	border-radius: 0.5em;
 	box-shadow: 3px 3px 12px 0px rgba(0, 0, 0, 0.25);
 	color: #272727;
-	padding: 1em 0.5em;
+	padding: 1.5em 0.5em 1em 0.5em;
 	margin-top: -1em;
 	position: absolute;
 	z-index: 2;
@@ -760,6 +760,7 @@ footer {
 	p {
 		margin: 0.5em 2em 0 2em;
 		font-size: 0.5em;
+		text-align: center;
 	}
 
 	p.donated {
@@ -767,10 +768,21 @@ footer {
 		font-size: 0.5em;
 	}
 
+	.close-button {
+		cursor: pointer;
+		display: inline-flex;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transform: translate(10px, 26px) scale(0.5);
+		z-index: 10;
+	}
+
 	.donate-button {
 		border: 1px solid green;
 		border-radius: 5px;
 		padding: 2px 6px 2px 4px;
+		line-height: 2em;
 		white-space: nowrap;
 	}
 
@@ -808,7 +820,6 @@ footer {
 .donate-tier {
 	display: block;
 	width: 100%;
-	margin-bottom: 0.5em;
 	background-color: lighten(#914db3, 40%);
 	border-radius: 10px;
 	z-index: 0;
@@ -924,6 +935,16 @@ footer {
 			}
 
 			&:hover {
+				&::before {
+					position: absolute;
+					right: 14px;
+					content: 'Donate to unlock';
+					font-size: 0.45em;
+					margin-top: 32px;
+					font-variant: all-small-caps;
+					color: #999999;
+				}
+
 				&::after {
 					background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M24 48c13.255 0 24-10.745 24-24S37.255 0 24 0 0 10.745 0 24s10.745 24 24 24z' fill='%2377D477'/%3E%3Cpath opacity='.2' d='M15.75 26.775a1.857 1.857 0 01-1.875-1.875v-5.475C13.875 13.875 18.45 9.3 24 9.3c3.45 0 6.6 1.725 8.475 4.65.6.9.3 2.025-.525 2.625-.9.6-2.025.3-2.625-.525-1.2-1.8-3.15-2.925-5.325-2.925a6.37 6.37 0 00-6.375 6.375v5.475c0 .9-.825 1.8-1.875 1.8z' fill='%23231F20'/%3E%3Cpath d='M15.75 25.275a1.857 1.857 0 01-1.875-1.875v-5.475C13.875 12.375 18.45 7.8 24 7.8c3.45 0 6.6 1.725 8.475 4.65.6.9.3 2.025-.525 2.625-.9.6-2.025.3-2.625-.525-1.2-1.8-3.15-2.925-5.325-2.925A6.37 6.37 0 0017.625 18v5.475c0 .9-.825 1.8-1.875 1.8zM24 24c-1.65 0-3 1.35-3 3 0 1.125.6 2.1 1.5 2.55v1.95c0 .825.675 1.5 1.5 1.5s1.5-.675 1.5-1.5v-1.95c.9-.525 1.5-1.5 1.5-2.55 0-1.65-1.35-3-3-3z' fill='%234F5D73'/%3E%3Cpath opacity='.2' d='M35.25 20.25h-22.5c-1.275 0-2.25.975-2.25 2.25v14.25c0 1.275.975 2.25 2.25 2.25h22.5c1.275 0 2.25-.975 2.25-2.25V22.5c0-1.275-.975-2.25-2.25-2.25zm-9.75 10.8V33c0 .825-.675 1.5-1.5 1.5s-1.5-.675-1.5-1.5v-1.95c-.9-.525-1.5-1.5-1.5-2.55 0-1.65 1.35-3 3-3s3 1.35 3 3c0 1.125-.6 2.1-1.5 2.55z' fill='%23231F20'/%3E%3Cpath d='M35.25 18.75h-22.5c-1.275 0-2.25.975-2.25 2.25v14.25c0 1.275.975 2.25 2.25 2.25h22.5c1.275 0 2.25-.975 2.25-2.25V21c0-1.275-.975-2.25-2.25-2.25zm-9.75 10.8v1.95c0 .825-.675 1.5-1.5 1.5s-1.5-.675-1.5-1.5v-1.95c-.9-.525-1.5-1.5-1.5-2.55 0-1.65 1.35-3 3-3s3 1.35 3 3c0 1.125-.6 2.1-1.5 2.55z' fill='%23fff'/%3E%3C/svg%3E");
 				}
@@ -996,7 +1017,7 @@ img.center {
 	margin-top: 0 !important;
 }
 
-.mb-05 {
+.mt-05 {
 	margin-top: 0.5em !important;
 }
 
@@ -1008,8 +1029,20 @@ img.center {
 	margin-top: 2em !important;
 }
 
+.ml-05 {
+	margin-left: 0.5em !important;
+}
+
 .ml-1 {
 	margin-left: 1em !important;
+}
+
+.mr-05 {
+	margin-right: 0.5em !important;
+}
+
+.mr-1 {
+	margin-right: 1em !important;
 }
 
 @keyframes typedjs-blink {
@@ -1159,6 +1192,10 @@ img.center {
 		p,
 		p.donated {
 			font-size: 0.5em;
+		}
+
+		.close-button {
+			transform: translate(14px, 12px) scale(0.375);
 		}
 
 		.tier {
