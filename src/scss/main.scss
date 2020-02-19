@@ -889,6 +889,16 @@ footer {
 	}
 }
 
+.pro--badge {
+	&::before {
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
+		top: -2px;
+		margin-right: 0.2em;
+	}
+}
+
 .pro--inline {
 	&::before {
 		display: inline-block;
