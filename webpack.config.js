@@ -47,7 +47,7 @@ module.exports = function(env, argv) {
 	return {
 		entry: ['./src/index.ts', './src/scss/main.scss'],
 		mode: env.production ? 'production' : 'development',
-		devtool: 'source-map',
+		devtool: env.production ? undefined : 'source-map', //'eval-source-map',
 		output: {
 			filename: '[name].js',
 			path: path.resolve(__dirname, 'dist'),
@@ -113,7 +113,7 @@ module.exports = function(env, argv) {
 						{
 							loader: 'css-loader',
 							options: {
-								sourceMap: true,
+								sourceMap: !env.production,
 								url: false
 							}
 						},
@@ -122,13 +122,13 @@ module.exports = function(env, argv) {
 							options: {
 								ident: 'postcss',
 								plugins: [require('autoprefixer')()],
-								sourceMap: true
+								sourceMap: !env.production
 							}
 						},
 						{
 							loader: 'sass-loader',
 							options: {
-								sourceMap: true
+								sourceMap: !env.production
 							}
 						}
 					]
