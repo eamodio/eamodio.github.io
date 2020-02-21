@@ -26,9 +26,9 @@ export class App {
 		}
 
 		// Setup easter egg
-		DOM.listenAll('[data-action="marvin"]', 'click', this.onMarvinClicked.bind(this));
+		DOM.on('[data-action="marvin"]', 'click', this.onMarvinClicked.bind(this));
 
-		DOM.listenAll('[data-action="back"]', 'click', this.onBackButtonClicked.bind(this));
+		DOM.on('[data-action="back"]', 'click', this.onBackButtonClicked.bind(this));
 		window.addEventListener('hashchange', this.onHashChanged.bind(this), false);
 
 		const [hash, paths] = this.getHashAndPaths();

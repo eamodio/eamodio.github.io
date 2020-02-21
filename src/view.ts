@@ -4,7 +4,7 @@ import { DOM } from './dom';
 
 export class View {
 	constructor(public name: string) {
-		DOM.listenAll(`[data-action="${this.name}"]`, 'click', this.onButtonClicked.bind(this));
+		DOM.on(`[data-action="${this.name}"]`, 'click', this.onButtonClicked.bind(this));
 	}
 
 	get hash(): string {

@@ -24,15 +24,15 @@ export class PureView extends View {
 	constructor(public name: string) {
 		super(name);
 
-		DOM.listen(document.body, 'click', this.onBodyClicked.bind(this));
-		DOM.listenAll('[data-action="pure-donate-close-button"]', 'click', this.onCloseButtonClicked.bind(this));
-		DOM.listenAll('[data-action="pure-donate-button"]', 'click', this.onDonateButtonClicked.bind(this));
-		DOM.listenAll('[data-action="pure-tier"]', 'click', this.onTierClicked.bind(this));
-		DOM.listenAll('[data-action="watch-toggle"]', 'click', this.onWatchClicked.bind(this));
+		DOM.on(document.body, 'click', this.onBodyClicked.bind(this));
+		DOM.on('[data-action="pure-donate-close-button"]', 'click', this.onCloseButtonClicked.bind(this));
+		DOM.on('[data-action="pure-donate-button"]', 'click', this.onDonateButtonClicked.bind(this));
+		DOM.on('[data-action="pure-tier"]', 'click', this.onTierClicked.bind(this));
+		DOM.on('[data-action="watch-toggle"]', 'click', this.onWatchClicked.bind(this));
 
 		this.$donatePopup = DOM.$<HTMLElement>('[data-target="pure-donate-popup"]')[0]!;
 
-		this.update();
+		this.update(true);
 	}
 
 	activate(paths?: string[]) {
@@ -43,16 +43,29 @@ export class PureView extends View {
 		const [route, ...data] = paths ?? [];
 		switch (route) {
 			case 'donate': {
-				const [tier] = data;
+				let [tier] = data;
+
+				if (tier === 'reset') {
+					Storage.clear();
+					this.setPath('donate');
+					location.reload();
+
+					return;
+				}
 
 				let $el;
 				[$el] = DOM.$('[data-target="donate-scroll-to"]');
 				$el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 				if (!tier) {
-					this.setActiveTier(undefined);
+					const donation = Storage.get<Donation>(DonationKey);
+					if (donation?.tier === undefined) {
+						this.setActiveTier(undefined);
 
-					return;
+						return;
+					}
+
+					tier = donation.tier.toString();
 				}
 
 				const [$tier] = DOM.$<HTMLElement>(`[data-tier="${tier}"]`);
@@ -131,14 +144,15 @@ export class PureView extends View {
 		this.update();
 	}
 
-	private update() {
+	private update(initializing: boolean = false) {
 		const donation = Storage.get<Donation>(DonationKey);
 		if (donation === undefined) return;
 
-		let $el;
-		$el = DOM.$<HTMLAnchorElement>('[data-target="pure-donated-on"]')[0]!;
+		const $container = DOM.$<HTMLDivElement>('[data-target="pure-donate-code-container"]')[0]!;
+		$container.dataset.status = initializing ? 'donated' : 'pending';
 
-		if ($el == null) {
+		const $donatedOn = DOM.$<HTMLParagraphElement>('[data-target="pure-donated-on"]')[0]!;
+		if ($donatedOn == null) {
 			const template = document.createElement('template');
 			template.innerHTML = `<p class="donated" data-target="pure-donated-on">
 	You donated on ${new Date(donation.timestamp).toLocaleDateString()}. Thank you!
@@ -147,14 +161,37 @@ export class PureView extends View {
 			this.$donatePopup.prepend(template.content.firstChild!);
 		}
 
+		const $code = DOM.$<HTMLDivElement>('[data-target="pure-donate-code"]')[0]!;
+
+		if (!initializing) {
+			const disposable = DOM.on(document, 'visibilitychange', () => {
+				if (!document.hidden) {
+					disposable.dispose();
+					setTimeout(() => {
+						$container.dataset.status = 'still-pending';
+
+						const clickDisposable = DOM.on($code, 'click', () => {
+							clickDisposable.dispose();
+
+							$container.dataset.status = 'pending';
+							setTimeout(() => ($container.dataset.status = 'donated'), 1000);
+						});
+
+						setTimeout(() => {
+							clickDisposable.dispose();
+							$container.dataset.status = 'donated';
+						}, 20000);
+					}, 10000);
+				}
+			});
+		}
+
 		const date = new Date();
 		const code = `${date
 			.getUTCFullYear()
 			.toString()
 			.substr(2)}${date.getUTCMonth().toString(16)}`;
 
-		$el = DOM.$<HTMLAnchorElement>('[data-target="pure-donate-code"]')[0]!;
-		$el.textContent = code;
-		$el.classList.add('donate-code--donated');
+		$code.textContent = code;
 	}
 }

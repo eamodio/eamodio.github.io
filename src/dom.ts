@@ -2,26 +2,55 @@
 /*global document*/
 
 export namespace DOM {
-	export function listen<K extends keyof WindowEventMap>(
-		$el: Element,
-		name: K,
-		listener: (this: Element, ev: WindowEventMap[K]) => any,
-		options?: boolean | AddEventListenerOptions
-	) {
-		$el.addEventListener(name, listener as EventListener, options ?? false);
-	}
-
-	export function listenAll<K extends keyof WindowEventMap>(
+	export function on<K extends keyof DocumentEventMap>(
 		selector: string,
 		name: K,
-		listener: (this: Element, ev: WindowEventMap[K]) => any,
-		el?: Element,
+		listener: (this: Element, ev: DocumentEventMap[K]) => any,
+		options?: boolean | AddEventListenerOptions,
+		el?: Element
+	): { dispose: () => void };
+	export function on<K extends keyof DocumentEventMap>(
+		el: Document | Element,
+		name: K,
+		listener: (this: Element, ev: DocumentEventMap[K]) => any,
 		options?: boolean | AddEventListenerOptions
-	) {
-		const $els = (el ?? document).querySelectorAll(selector);
-		for (const $el of $els) {
-			$el.addEventListener(name, listener as EventListener, options ?? false);
+	): { dispose: () => void };
+	export function on<K extends keyof DocumentEventMap>(
+		selectorOrElement: string | Document | Element,
+		name: K,
+		listener: (this: Element, ev: DocumentEventMap[K]) => any,
+		options?: boolean | AddEventListenerOptions,
+		el?: Element
+	): { dispose: () => void } {
+		let disposed = false;
+
+		if (typeof selectorOrElement === 'string') {
+			const $els = (el ?? document).querySelectorAll(selectorOrElement);
+			for (const $el of $els) {
+				$el.addEventListener(name, listener as EventListener, options ?? false);
+			}
+
+			return {
+				dispose: () => {
+					if (disposed) return;
+					disposed = true;
+
+					for (const $el of $els) {
+						$el.removeEventListener(name, listener as EventListener, options ?? false);
+					}
+				}
+			};
 		}
+
+		selectorOrElement.addEventListener(name, listener as EventListener, options ?? false);
+		return {
+			dispose: () => {
+				if (disposed) return;
+				disposed = true;
+
+				selectorOrElement.removeEventListener(name, listener as EventListener, options ?? false);
+			}
+		};
 	}
 
 	export function $<T extends Element>(selector: string): NodeListOf<T> {
