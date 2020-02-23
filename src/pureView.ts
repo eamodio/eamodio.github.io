@@ -30,12 +30,12 @@ export class PureView extends View {
 		DOM.on('[data-action="pure-tier"]', 'click', this.onTierClicked.bind(this));
 		DOM.on('[data-action="watch-toggle"]', 'click', this.onWatchClicked.bind(this));
 
-		this.$donatePopup = DOM.$<HTMLElement>('[data-target="pure-donate-popup"]')[0]!;
+		[this.$donatePopup] = DOM.$<HTMLElement>('[data-target="pure-donate-popup"]');
 
 		const donation = Storage.get<Donation>(DonationKey);
 		if (donation === undefined) return;
 
-		const $donatedOn = DOM.$<HTMLParagraphElement>('[data-target="pure-donated-on"]')[0]!;
+		const [$donatedOn] = DOM.$<HTMLParagraphElement>('[data-target="pure-donated-on"]');
 		if ($donatedOn == null) {
 			const template = document.createElement('template');
 			template.innerHTML = `<p class="donated" data-target="pure-donated-on">
@@ -54,7 +54,7 @@ export class PureView extends View {
 	activate(paths?: string[]) {
 		super.activate(paths);
 
-		const $email = DOM.$<HTMLAnchorElement>('[data-target="email"]')[0];
+		const [$email] = DOM.$<HTMLAnchorElement>('[data-target="email"]');
 		if ($email) {
 			$email.href = 'mailto:eamodio+pure@gmail.com?subject=Pure Clock Face';
 		}
@@ -74,8 +74,11 @@ export class PureView extends View {
 					return;
 				}
 
+				console.log(document.documentElement.clientHeight);
 				let $el;
-				[$el] = DOM.$('[data-target="donate-scroll-to"]');
+				[$el] = DOM.$(
+					`[data-target="donate-scroll-to${document.documentElement.clientHeight > 840 ? '-tall' : ''}"]`
+				);
 				$el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 				if (!tier) {
@@ -112,7 +115,7 @@ export class PureView extends View {
 	deactivate() {
 		super.deactivate();
 
-		const $email = DOM.$<HTMLAnchorElement>('[data-target="email"]')[0];
+		const [$email] = DOM.$<HTMLAnchorElement>('[data-target="email"]');
 		if ($email) {
 			$email.href = 'mailto:eric@amod.io';
 		}
@@ -178,8 +181,8 @@ export class PureView extends View {
 		const donation = Storage.get<Donation>(DonationKey);
 		if (donation === undefined) return;
 
-		const $container = DOM.$<HTMLDivElement>('[data-target="pure-donate-code-container"]')[0]!;
-		const $code = DOM.$<HTMLDivElement>('[data-target="pure-donate-code"]')[0]!;
+		const [$container] = DOM.$<HTMLDivElement>('[data-target="pure-donate-code-container"]');
+		const [$code] = DOM.$<HTMLDivElement>('[data-target="pure-donate-code"]');
 
 		let pendingTimeout = 0;
 		let clickDisposable: Disposable | undefined;
