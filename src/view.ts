@@ -11,7 +11,7 @@ export class View {
 		return `#${this.name}`;
 	}
 
-	activate(paths?: string[]) {
+	activate(paths?: string[], loading: boolean = false) {
 		// console.log(`View(${this.name}).activate`);
 	}
 

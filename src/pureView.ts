@@ -20,7 +20,6 @@ const DonationKey = 'pure-donation';
 export class PureView extends View {
 	private readonly $donatePopup: HTMLElement;
 	private _tier: DonationTier | undefined;
-	private _initialLoad: boolean = true;
 
 	constructor(public name: string) {
 		super(name);
@@ -52,11 +51,8 @@ export class PureView extends View {
 		);
 	}
 
-	activate(paths?: string[]) {
-		super.activate(paths);
-
-		const initialLoad = this._initialLoad;
-		this._initialLoad = false;
+	activate(paths?: string[], loading: boolean = false) {
+		super.activate(paths, loading);
 
 		const [$email] = DOM.$<HTMLAnchorElement>('[data-target="email"]');
 		if ($email) {
@@ -86,7 +82,7 @@ export class PureView extends View {
 
 				if (!tier) {
 					const donation = Storage.get<Donation>(DonationKey);
-					if (donation?.tier === undefined || !initialLoad) {
+					if (donation?.tier === undefined || !loading) {
 						this.setActiveTier(undefined);
 					} else {
 						this.setPath(`/donate/${donation.tier}`);

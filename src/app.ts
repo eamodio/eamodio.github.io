@@ -92,7 +92,7 @@ export class App {
 
 				const sectionClass = `is-section--${hash}`;
 				if (classList.contains(sectionClass)) {
-					view.activate(paths);
+					view.activate(paths, loading);
 
 					return;
 				}
@@ -102,7 +102,7 @@ export class App {
 				}
 
 				classList.add('is-section', sectionClass);
-				view.activate(paths);
+				view.activate(paths, loading);
 
 				break;
 			}
