@@ -1,6 +1,10 @@
 'use strict';
 /*global document*/
 
+export interface Disposable {
+	dispose: () => void;
+}
+
 export namespace DOM {
 	export function on<K extends keyof DocumentEventMap>(
 		selector: string,
@@ -8,20 +12,20 @@ export namespace DOM {
 		listener: (this: Element, ev: DocumentEventMap[K]) => any,
 		options?: boolean | AddEventListenerOptions,
 		el?: Element
-	): { dispose: () => void };
+	): Disposable;
 	export function on<K extends keyof DocumentEventMap>(
 		el: Document | Element,
 		name: K,
 		listener: (this: Element, ev: DocumentEventMap[K]) => any,
 		options?: boolean | AddEventListenerOptions
-	): { dispose: () => void };
+	): Disposable;
 	export function on<K extends keyof DocumentEventMap>(
 		selectorOrElement: string | Document | Element,
 		name: K,
 		listener: (this: Element, ev: DocumentEventMap[K]) => any,
 		options?: boolean | AddEventListenerOptions,
 		el?: Element
-	): { dispose: () => void } {
+	): Disposable {
 		let disposed = false;
 
 		if (typeof selectorOrElement === 'string') {

@@ -1,6 +1,6 @@
 'use strict';
 /*global document*/
-import { DOM, Storage } from './dom';
+import { Disposable, DOM, Storage } from './dom';
 import { View } from './view';
 
 interface Donation {
@@ -32,11 +32,32 @@ export class PureView extends View {
 
 		this.$donatePopup = DOM.$<HTMLElement>('[data-target="pure-donate-popup"]')[0]!;
 
-		this.update(true);
+		const donation = Storage.get<Donation>(DonationKey);
+		if (donation === undefined) return;
+
+		const $donatedOn = DOM.$<HTMLParagraphElement>('[data-target="pure-donated-on"]')[0]!;
+		if ($donatedOn == null) {
+			const template = document.createElement('template');
+			template.innerHTML = `<p class="donated" data-target="pure-donated-on">
+	You donated on ${new Date(donation.timestamp).toLocaleDateString()}. Thank you!
+</p>`;
+
+			this.$donatePopup.prepend(template.content.firstChild!);
+		}
+
+		this.updateDonation(
+			DOM.$<HTMLDivElement>('[data-target="pure-donate-code-container"]')[0]!,
+			DOM.$<HTMLDivElement>('[data-target="pure-donate-code"]')[0]!
+		);
 	}
 
 	activate(paths?: string[]) {
 		super.activate(paths);
+
+		const $email = DOM.$<HTMLAnchorElement>('[data-target="email"]')[0];
+		if ($email) {
+			$email.href = 'mailto:eamodio+pure@gmail.com?subject=Pure Clock Face';
+		}
 
 		DOM.$('[data-action="watch-toggle"]')[0]?.classList.remove('expand');
 
@@ -74,7 +95,7 @@ export class PureView extends View {
 				const amount = $tier.dataset.tierAmount;
 
 				[$el] = DOM.$<HTMLAnchorElement>('[data-target="pure-donate-button"]');
-				$el.href = `https://www.paypal.com/paypalme2/eamodio${amount == null ? '' : `/${amount}USD`}`;
+				$el.href = `https://www.paypal.com/paypalme2/eamodio${amount == null ? '' : `/${amount}`}`;
 				$el.innerHTML = `Donate ${tierName ? `${tierName} ` : ''}<span class="via">via</span> PayPal`;
 
 				this.setActiveTier($tier?.classList.contains('active') ? undefined : Number(tier), $tier);
@@ -85,6 +106,15 @@ export class PureView extends View {
 			default: {
 				this.setActiveTier(undefined);
 			}
+		}
+	}
+
+	deactivate() {
+		super.deactivate();
+
+		const $email = DOM.$<HTMLAnchorElement>('[data-target="email"]')[0];
+		if ($email) {
+			$email.href = 'mailto:eric@amod.io';
 		}
 	}
 
@@ -99,7 +129,15 @@ export class PureView extends View {
 	private onDonateButtonClicked(e: MouseEvent) {
 		e.stopPropagation();
 
-		setTimeout(() => this.setDonation(), 500);
+		const date = new Date();
+		const donation: Donation = {
+			timestamp: date.getTime(),
+			tier: this._tier,
+			version: 1
+		};
+
+		Storage.set(DonationKey, donation);
+		this.update();
 	}
 
 	private onTierClicked(e: MouseEvent) {
@@ -132,66 +170,67 @@ export class PureView extends View {
 		}
 	}
 
-	private setDonation() {
-		const date = new Date();
-		const donation: Donation = {
-			timestamp: date.getTime(),
-			tier: this._tier,
-			version: 1
-		};
+	private _donateDisposable: Disposable | undefined;
 
-		Storage.set(DonationKey, donation);
-		this.update();
-	}
+	private update() {
+		this._donateDisposable?.dispose();
 
-	private update(initializing: boolean = false) {
 		const donation = Storage.get<Donation>(DonationKey);
 		if (donation === undefined) return;
 
 		const $container = DOM.$<HTMLDivElement>('[data-target="pure-donate-code-container"]')[0]!;
-		$container.dataset.status = initializing ? 'donated' : 'pending';
-
-		const $donatedOn = DOM.$<HTMLParagraphElement>('[data-target="pure-donated-on"]')[0]!;
-		if ($donatedOn == null) {
-			const template = document.createElement('template');
-			template.innerHTML = `<p class="donated" data-target="pure-donated-on">
-	You donated on ${new Date(donation.timestamp).toLocaleDateString()}. Thank you!
-</p>`;
-
-			this.$donatePopup.prepend(template.content.firstChild!);
-		}
-
 		const $code = DOM.$<HTMLDivElement>('[data-target="pure-donate-code"]')[0]!;
 
-		if (!initializing) {
-			const disposable = DOM.on(document, 'visibilitychange', () => {
-				if (!document.hidden) {
-					disposable.dispose();
-					setTimeout(() => {
-						$container.dataset.status = 'still-pending';
+		let pendingTimeout = 0;
+		let clickDisposable: Disposable | undefined;
+		let clickTimeout = 0;
+		let acceptTimeout = 0;
+		const disposable = DOM.on(document, 'visibilitychange', () => {
+			if (!document.hidden) {
+				disposable.dispose();
 
-						const clickDisposable = DOM.on($code, 'click', () => {
-							clickDisposable.dispose();
+				$container.dataset.status = 'pending';
 
-							$container.dataset.status = 'pending';
-							setTimeout(() => ($container.dataset.status = 'donated'), 1000);
-						});
+				pendingTimeout = setTimeout(() => {
+					$container.dataset.status = 'still-pending';
 
-						setTimeout(() => {
-							clickDisposable.dispose();
-							$container.dataset.status = 'donated';
-						}, 20000);
-					}, 10000);
-				}
-			});
-		}
+					clickDisposable = DOM.on($code, 'click', () => {
+						clickDisposable?.dispose();
+						clearTimeout(acceptTimeout);
 
+						$container.dataset.status = 'pending';
+						clickTimeout = setTimeout(() => this.updateDonation($container, $code), 1000) as any;
+					});
+
+					acceptTimeout = setTimeout(() => {
+						clickDisposable?.dispose();
+
+						this.updateDonation($container, $code);
+					}, 20000) as any;
+				}, 10000) as any;
+			}
+		});
+
+		this._donateDisposable = {
+			dispose: () => {
+				clearTimeout(pendingTimeout);
+				clearTimeout(clickTimeout);
+				clearTimeout(acceptTimeout);
+
+				disposable.dispose();
+				clickDisposable?.dispose();
+			}
+		};
+	}
+
+	private updateDonation($container: HTMLDivElement, $code: HTMLDivElement) {
 		const date = new Date();
 		const code = `${date
 			.getUTCFullYear()
 			.toString()
 			.substr(2)}${date.getUTCMonth().toString(16)}`;
 
+		$container.dataset.status = 'donated';
 		$code.textContent = code;
 	}
 }

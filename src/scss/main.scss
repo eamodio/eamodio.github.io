@@ -73,15 +73,16 @@ a {
 	flex: auto 1 0;
 	font-size: 2em;
 	letter-spacing: 0.125em;
-	margin: 0.1em 0 0 0.25em;
+	margin: 0;
 	max-width: 960px;
 	text-shadow: 2px 3px 6px #000, 0px 0px 42px #666;
-	transform: translateY(-300%);
+	transform: translate(5px, -300%);
 	transform-origin: top left;
 	transition: transform 500ms cubic-bezier(1, 0.4, 0.7, 1.5);
+	white-space: nowrap;
 
 	body.is-section & {
-		transform: translateY(5%);
+		transform: translate(5px, 8%);
 		transition-delay: 600ms;
 	}
 }
@@ -340,7 +341,7 @@ a {
 	flex-direction: column;
 	font-size: 2.5em;
 	left: 0;
-	margin: 3em auto;
+	margin: 2.25em auto 1.6em auto;
 	max-width: 960px;
 	min-height: 100px;
 	position: absolute;
@@ -593,8 +594,8 @@ blockquote {
 
 footer {
 	display: block;
-	margin: -6em 0 0 0;
-	padding: 0.75em 0;
+	margin: -5.25em 0 0 0;
+	padding: 1em 0 0 0;
 
 	& a {
 		color: rgba(255, 255, 255, 0.7);
@@ -611,8 +612,9 @@ footer {
 	align-items: center;
 	display: flex;
 	justify-content: center;
-	margin: 0 0 1rem 0;
+	margin: 1rem 0 0.5rem 0;
 	padding: 0;
+	position: relative;
 
 	& * {
 		align-items: center;
@@ -651,9 +653,15 @@ footer {
 	font-weight: 100;
 	letter-spacing: 0.1em;
 	opacity: 0.99;
-	text-align: center;
 	text-transform: uppercase;
-	padding: 1em;
+	position: absolute;
+	bottom: 0.1em;
+	left: 0.5em;
+
+	span {
+		font-size: 0.5rem;
+		display: block;
+	}
 }
 
 .footer__copyright {
@@ -669,12 +677,13 @@ footer {
 
 .footer__marvin {
 	cursor: pointer;
-	float: right;
 	height: 35px;
-	margin: -1.25em 0.5em 0 0;
 	opacity: 0.4;
 	transition: opacity 250ms;
 	width: 35px;
+	position: absolute;
+	right: 0;
+	bottom: 0.1em;
 
 	&:hover {
 		opacity: 0.99;
@@ -682,7 +691,7 @@ footer {
 }
 
 .marvin {
-	background: url(../assets/marvin-takeover.svg) center center / cover no-repeat;
+	background: black url(../assets/marvin-takeover.svg) center center / contain no-repeat;
 	cursor: pointer;
 	height: 100%;
 	position: absolute;
@@ -702,12 +711,12 @@ footer {
 
 .watch {
 	background: url('../assets/watch.png') center center / contain no-repeat;
-	height: 308px;
-	width: 308px;
-	max-height: 308px;
-	max-width: 308px;
-	min-height: 308px;
-	min-width: 308px;
+	height: 231px;
+	width: 231px;
+	max-height: 231px;
+	max-width: 231px;
+	min-height: 231px;
+	min-width: 231px;
 	flex: auto 1 1;
 	position: relative;
 	cursor: pointer;
@@ -726,7 +735,7 @@ footer {
 	}
 
 	&.expand {
-		transform: scale(1.5);
+		transform: scale(2);
 	}
 }
 
@@ -766,7 +775,27 @@ footer {
 	p.donated {
 		text-align: center;
 		font-size: 0.5em;
-		margin: 0 0 1em 0;
+	}
+
+	p.note {
+		margin: -1em 5em 0 5em;
+		font-size: 0.35em;
+
+		.email {
+			margin-left: 0.25em;
+			white-space: nowrap;
+
+			svg {
+				position: relative;
+				top: 2px;
+				width: 1em;
+				height: 1em;
+
+				path {
+					fill: #424242;
+				}
+			}
+		}
 	}
 
 	.close-button {
@@ -785,20 +814,25 @@ footer {
 		padding: 2px 6px 2px 4px;
 		line-height: 2em;
 		white-space: nowrap;
+
+		&:hover {
+			background-color: lighten(#c88c50, 10%);
+			color: lighten(#c88c50, 10%);
+		}
 	}
 
 	.donate-code-container {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin: 0.75em 0;
+		margin: 0.5em 0;
 		position: relative;
 
 		&::before,
 		&::after {
 			font-variant: all-small-caps;
 			color: white;
-			font-size: 0.6em;
+			font-size: 0.7em;
 			position: absolute;
 			white-space: pre;
 			z-index: 1;
@@ -814,26 +848,37 @@ footer {
 			font-size: 0.5em;
 		}
 
-		&:not([data-status='donated']) {
-			&::before {
-				content: 'Donate for code';
-			}
+		&::before {
+			content: 'Donation code';
+		}
+
+		&::after {
+			content: "Revealed once you've donated";
 		}
 
 		&[data-status='pending'] {
 			.donate-code {
 				background-color: #c88c50;
 				color: #c88c50;
+
+				&:hover {
+					background-color: darken(#c88c50, 10%);
+					color: darken(#c88c50, 10%);
+				}
+			}
+
+			&::after {
+				content: 'confirmation';
+				font-size: 0.7em;
 			}
 
 			&::before {
-				content: 'Awaiting confirmation';
-				margin-top: 0.5em;
+				content: 'Waiting for';
 			}
 
 			.donate-code-spinner {
 				display: unset;
-				margin-top: 0.3em;
+				top: 25%;
 			}
 		}
 
@@ -842,6 +887,11 @@ footer {
 				background-color: #c88c50;
 				color: #c88c50;
 				cursor: pointer;
+
+				&:hover {
+					background-color: darken(#c88c50, 10%);
+					color: darken(#c88c50, 10%);
+				}
 			}
 
 			&::before {
@@ -849,17 +899,27 @@ footer {
 			}
 
 			&::after {
-				content: 'Click to retry';
+				content: 'Too long?  Click to retry';
 			}
 
 			.donate-code-spinner {
 				display: unset;
+				top: 30%;
 			}
 		}
 
 		&[data-status='donated'] {
 			.donate-code {
 				background-color: #50c850;
+				cursor: pointer;
+
+				&:hover {
+					background-color: darken(#50c850, 10%);
+				}
+			}
+
+			&::after {
+				content: 'Enter code on device';
 			}
 
 			.donate-code-spinner {
@@ -873,10 +933,15 @@ footer {
 		color: white;
 		background-color: #c85050;
 		font-size: 2em;
-		padding: 0 0.75em 0 1em;
+		padding: 0.25em 0.75em 0.25em 1em;
 		letter-spacing: 0.25em;
 		position: relative;
 		user-select: none;
+		transition: background-color 250ms, color 250ms;
+
+		&:hover {
+			background-color: darken(#c85050, 10%);
+		}
 	}
 
 	.donate-code-spinner {
@@ -934,13 +999,14 @@ footer {
 
 .pure-features {
 	display: flex;
-	margin: 1em 0 0 0;
+	margin: 0;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
 .donate-features {
+	margin-top: 0.5em;
 	width: 100%;
 
 	.subhead {
@@ -1103,8 +1169,8 @@ img.center {
 }
 
 .spinner--dots {
-	width: 0.75em;
-	height: 0.75em;
+	width: 1.5em;
+	height: 1.5em;
 	position: absolute;
 	pointer-events: none;
 	user-select: none;
@@ -1272,7 +1338,7 @@ img.center {
 	}
 }
 
-@media all and (max-height: 320px) {
+@media all and (max-height: 260px) {
 	footer {
 		visibility: hidden;
 	}
@@ -1280,7 +1346,8 @@ img.center {
 
 @media all and (max-width: 1120px) {
 	.sections {
-		margin: 3em 2em;
+		margin-left: 2em;
+		margin-right: 2em;
 	}
 }
 
@@ -1291,13 +1358,17 @@ img.center {
 	}
 
 	.header__buttons {
-		transform: translateY(-7px);
+		transform: translateY(-10px);
 	}
 
 	.header__headine {
 		body.is-section & {
-			transform: translateY(-35%);
+			transform: translate(0, -35%);
 		}
+	}
+
+	.sections {
+		margin-top: 2.75em;
 	}
 }
 
@@ -1307,11 +1378,16 @@ img.center {
 	}
 
 	.sections {
-		margin: 3em 1.25em;
+		margin-left: 1.25em;
+		margin-right: 1.25em;
 	}
 
 	.donate-tiers-features {
 		font-size: 0.9em;
+	}
+
+	footer {
+		margin-top: -5.5em;
 	}
 }
 
@@ -1326,15 +1402,14 @@ img.center {
 	}
 
 	.header__buttons {
-		transform: translateY(0);
-		font-size: 0.8em;
+		font-size: 0.85em;
 	}
 
 	.header__headine {
 		font-size: 2em;
 
 		body.is-section & {
-			transform: translateY(-35%);
+			transform: translate(0, -40%);
 		}
 	}
 
@@ -1344,7 +1419,7 @@ img.center {
 	}
 
 	.sections {
-		margin: 3em 0.5em !important;
+		margin: 2.5em 0.5em 1.75em 0.5em !important;
 	}
 
 	.section__back-button {
@@ -1390,11 +1465,15 @@ img.center {
 	}
 
 	.watch {
-		transform: translate(0%, 0%) scale(0.75);
-		margin: -1em 0;
+		height: 184.8px;
+		width: 184.8px;
+		max-height: 184.8px;
+		max-width: 184.8px;
+		min-height: 184.8px;
+		min-width: 184.8px;
 
 		&.expand {
-			transform: scale(1);
+			transform: scale(1.66666);
 		}
 	}
 
@@ -1419,28 +1498,12 @@ img.center {
 
 		.donate-code {
 			font-size: 1.5em;
+			padding-top: 0.5em;
 		}
 
-		.donate-code-container {
-			&::after {
-				font-size: 0.45em;
-			}
-
-			&[data-status='pending'] {
-				&::before {
-					margin-top: 0.2em;
-				}
-
-				.donate-code-spinner {
-					margin-top: 0.3em;
-				}
-			}
-
-			&[data-status='still-pending'] {
-				&::before {
-					top: -2px;
-				}
-			}
+		.donate-code-spinner {
+			width: 1.25em;
+			height: 1.25em;
 		}
 	}
 
@@ -1463,8 +1526,8 @@ img.center {
 		}
 	}
 
-	.footer {
-		margin: -7em 0 0 0;
+	footer {
+		margin-top: -6em;
 	}
 
 	.footer__links {
@@ -1472,7 +1535,6 @@ img.center {
 	}
 
 	.footer__marvin {
-		margin: -2.5em 0.25em 0 0;
 		transform: scale(0.8);
 	}
 }
@@ -1482,10 +1544,31 @@ img.center {
 		font-size: 0.6em;
 	}
 
+	.header__buttons {
+		font-size: 0.75em;
+		transform: translateY(-5px);
+	}
+
+	.header__headine {
+		font-size: 2em;
+
+		body.is-section & {
+			transform: translate(0, -40%);
+		}
+	}
+
+	.sections {
+		margin-bottom: 1.9em !important;
+	}
+
 	.section__back-button {
 		left: -0.6em;
 		top: -0.6em;
 		transform: scale(0.4);
+	}
+
+	footer {
+		margin-top: -6.5em;
 	}
 
 	.footer__links {
@@ -1493,7 +1576,13 @@ img.center {
 	}
 
 	.footer__marvin {
-		margin: -3.5em 0 0 0;
 		transform: scale(0.75);
+	}
+}
+
+@media all and (max-width: 280px) {
+	.footer__attribution,
+	.footer__marvin {
+		display: none;
 	}
 }
