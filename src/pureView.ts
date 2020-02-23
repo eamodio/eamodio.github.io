@@ -20,6 +20,7 @@ const DonationKey = 'pure-donation';
 export class PureView extends View {
 	private readonly $donatePopup: HTMLElement;
 	private _tier: DonationTier | undefined;
+	private _initialLoad: boolean = true;
 
 	constructor(public name: string) {
 		super(name);
@@ -54,6 +55,9 @@ export class PureView extends View {
 	activate(paths?: string[]) {
 		super.activate(paths);
 
+		const initialLoad = this._initialLoad;
+		this._initialLoad = false;
+
 		const [$email] = DOM.$<HTMLAnchorElement>('[data-target="email"]');
 		if ($email) {
 			$email.href = 'mailto:eamodio+pure@gmail.com?subject=Pure Clock Face';
@@ -64,7 +68,7 @@ export class PureView extends View {
 		const [route, ...data] = paths ?? [];
 		switch (route) {
 			case 'donate': {
-				let [tier] = data;
+				const [tier] = data;
 
 				if (tier === 'reset') {
 					Storage.clear();
@@ -74,7 +78,6 @@ export class PureView extends View {
 					return;
 				}
 
-				console.log(document.documentElement.clientHeight);
 				let $el;
 				[$el] = DOM.$(
 					`[data-target="donate-scroll-to${document.documentElement.clientHeight > 840 ? '-tall' : ''}"]`
@@ -83,13 +86,13 @@ export class PureView extends View {
 
 				if (!tier) {
 					const donation = Storage.get<Donation>(DonationKey);
-					if (donation?.tier === undefined) {
+					if (donation?.tier === undefined || !initialLoad) {
 						this.setActiveTier(undefined);
-
-						return;
+					} else {
+						this.setPath(`/donate/${donation.tier}`);
 					}
 
-					tier = donation.tier.toString();
+					return;
 				}
 
 				const [$tier] = DOM.$<HTMLElement>(`[data-tier="${tier}"]`);
