@@ -1,9 +1,9 @@
 @import '_normalize';
 
-body:not(.is-section--about) #about,
-body:not(.is-section--sponsor) #sponsor,
-body:not(.is-section--gitlens) #gitlens,
-body:not(.is-section--pure) #pure {
+body:not(.is-section--about) #section-about,
+body:not(.is-section--sponsor) #section-sponsor,
+body:not(.is-section--gitlens) #section-gitlens,
+body:not(.is-section--pure) #section-pure {
 	display: none;
 }
 
@@ -48,6 +48,7 @@ a {
 	font-weight: 400;
 	outline: none;
 	text-decoration: none;
+	transition: color 250ms;
 
 	&:hover,
 	&:focus {
@@ -262,6 +263,23 @@ a {
 	margin: 0.5em -1em -1em -1em;
 }
 
+p.button__badge {
+	font-size: 0.5em;
+	margin-top: 1em;
+	margin-bottom: -1em;
+	text-align: center;
+}
+
+.button__info {
+	font-size: 0.8em;
+	margin-top: 1.25em;
+
+	.cta__secondary & {
+		margin-top: 1.5em;
+		max-width: 25em;
+	}
+}
+
 .main {
 	background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url(../assets/bg.jpg) 50% 50% / cover no-repeat;
 	height: 100%;
@@ -399,6 +417,7 @@ a {
 
 .section {
 	margin: 0 1em;
+	position: relative;
 
 	& h3 {
 		margin: 0;
@@ -778,7 +797,7 @@ footer {
 	}
 
 	p.note {
-		margin: -1em 5em 0 5em;
+		margin: 0 5em;
 		font-size: 0.35em;
 
 		.email {
@@ -808,17 +827,17 @@ footer {
 		z-index: 10;
 	}
 
+	.button-group--donate-primary .button {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+
 	.donate-button {
 		border: 1px solid green;
 		border-radius: 5px;
 		padding: 2px 6px 2px 4px;
 		line-height: 2em;
 		white-space: nowrap;
-
-		&:hover {
-			background-color: lighten(#c88c50, 10%);
-			color: lighten(#c88c50, 10%);
-		}
 	}
 
 	.donate-code-container {

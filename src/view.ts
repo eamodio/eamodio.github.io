@@ -3,8 +3,19 @@
 import { DOM } from './dom';
 
 export class View {
+	private classes: string[];
+
 	constructor(public name: string) {
 		DOM.on(`[data-action="${this.name}"]`, 'click', this.onButtonClicked.bind(this));
+
+		const $el = DOM.$<HTMLDivElement>(`.section[data-view="${this.name}"]`)[0];
+
+		this.classes = ['is-section', `is-section--${this.name}`];
+
+		const classes = $el.dataset.classes;
+		if (classes != null) {
+			this.classes.push(...classes.split(' '));
+		}
 	}
 
 	get hash(): string {
@@ -13,10 +24,12 @@ export class View {
 
 	activate(paths?: string[], loading: boolean = false) {
 		// console.log(`View(${this.name}).activate`);
+		document.body.classList.add(...this.classes);
 	}
 
 	deactivate() {
 		// console.log(`View(${this.name}).deactivate`);
+		document.body.classList.remove(...this.classes);
 	}
 
 	protected getHash(path?: string): string {

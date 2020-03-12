@@ -5,8 +5,6 @@ import { MainView } from './mainView';
 import { View } from './view';
 import { PureView } from './pureView';
 
-const sectionRegex = /^is-section\S*/;
-
 export class App {
 	activeView = '';
 
@@ -17,9 +15,9 @@ export class App {
 		this.main = new MainView();
 
 		this.views = [];
-		for (const el of document.querySelectorAll<HTMLInputElement>('.section[data-view]')) {
-			const view = el.dataset.view;
-			if (view === undefined) continue;
+		for (const $el of DOM.$<HTMLInputElement>('.section[data-view]')) {
+			const view = $el.dataset.view;
+			if (view == null) continue;
 
 			const viewCtor = view === 'pure' ? PureView : View;
 			this.views.push(new viewCtor(view));
@@ -42,8 +40,6 @@ export class App {
 	switchView(hash: string, paths: string[], loading = false) {
 		const previous = this.activeView;
 
-		const classList = document.body.classList;
-
 		switch (hash) {
 			case '': {
 				this.activeView = '';
@@ -56,7 +52,6 @@ export class App {
 				}
 
 				if (!loading) {
-					classList.remove(...[...classList].filter(c => sectionRegex.test(c)));
 					document.location.hash = '';
 				}
 
@@ -90,18 +85,6 @@ export class App {
 				// Pause the typing animation if its running
 				this.main.pause();
 
-				const sectionClass = `is-section--${hash}`;
-				if (classList.contains(sectionClass)) {
-					view.activate(paths, loading);
-
-					return;
-				}
-
-				if (classList.contains('is-section')) {
-					classList.remove(...[...classList].filter(c => sectionRegex.test(c)));
-				}
-
-				classList.add('is-section', sectionClass);
 				view.activate(paths, loading);
 
 				break;
@@ -115,6 +98,9 @@ export class App {
 
 	private onHashChanged(e: HashChangeEvent) {
 		const [hash, paths] = this.getHashAndPaths();
+
+		if (this.redirect(hash, paths)) return;
+
 		this.switchView(hash, paths);
 	}
 
@@ -126,6 +112,10 @@ export class App {
 		}
 
 		return [hash, paths];
+	}
+
+	private redirect(hash: string, paths: string[]): boolean {
+		return false;
 	}
 
 	private onMarvinClicked(e: MouseEvent) {

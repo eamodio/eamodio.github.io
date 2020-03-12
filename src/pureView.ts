@@ -96,9 +96,23 @@ export class PureView extends View {
 				const tierName = $tier.dataset.tierName;
 				const amount = $tier.dataset.tierAmount;
 
-				[$el] = DOM.$<HTMLAnchorElement>('[data-target="pure-donate-button"]');
-				$el.href = `https://www.paypal.com/paypalme2/eamodio${amount == null ? '' : `/${amount}`}`;
-				$el.innerHTML = `Donate ${tierName ? `${tierName} ` : ''}<span class="via">via</span> PayPal`;
+				const $els = DOM.$<HTMLAnchorElement>('[data-target="pure-donate-button"]');
+				for ($el of $els) {
+					switch ($el.dataset.paymentVia) {
+						case 'paypal':
+							$el.href = `https://www.paypal.com/paypalme2/eamodio${amount == null ? '' : `/${amount}`}`;
+							$el.innerHTML = `Donate ${
+								tierName ? `${tierName} ` : ''
+							}<span class="via">via</span> PayPal`;
+							break;
+
+						case 'cash.app':
+							$el.innerHTML = `Donate ${
+								tierName ? `${tierName} ` : ''
+							}<span class="via">via</span> Cash App`;
+							break;
+					}
+				}
 
 				this.setActiveTier($tier?.classList.contains('active') ? undefined : Number(tier), $tier);
 

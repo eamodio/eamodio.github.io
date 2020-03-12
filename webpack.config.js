@@ -1,6 +1,7 @@
 'use strict';
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const glob = require('glob');
 const HtmlInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
@@ -14,6 +15,11 @@ module.exports = function(env, argv) {
 	env.production = Boolean(env.production);
 
 	const plugins = [
+		new ForkTsCheckerPlugin({
+			async: false,
+			eslint: true,
+			useTypescriptIncrementalApi: true
+		}),
 		new WriteFilePlugin(),
 		new MiniCssExtractPlugin({
 			filename: 'main.css'
@@ -85,23 +91,15 @@ module.exports = function(env, argv) {
 		module: {
 			rules: [
 				{
-					enforce: 'pre',
 					exclude: /node_modules|\.d\.ts$/,
 					test: /\.tsx?$/,
-					use: [
-						{
-							loader: 'eslint-loader',
-							options: {
-								cache: true,
-								failOnError: true
-							}
+					use: {
+						loader: 'ts-loader',
+						options: {
+							experimentalWatchApi: true,
+							transpileOnly: true
 						}
-					]
-				},
-				{
-					exclude: /node_modules|\.d\.ts$/,
-					test: /\.tsx?$/,
-					use: 'ts-loader'
+					}
 				},
 				{
 					exclude: /node_modules/,
