@@ -70,8 +70,73 @@
 				</div>
 			</div>
 
-			<!-- prettier-ignore -->
-			<%= require('./pure-donate.ejs')() %>
+			<div class="donate-popup hide" data-target="pure-donate-popup">
+				<div class="close-button" data-action="pure-donate-close-button">
+					<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+						<path
+							fill="#000"
+							d="M33.199 30l11.14-11.139a2.262 2.262 0 00-3.2-3.199L30 26.802l-11.139-11.14a2.262 2.262 0 00-3.199 3.199l11.14 11.14-11.14 11.138a2.262 2.262 0 003.199 3.2l11.14-11.14 11.138 11.14c.443.442 1.02.661 1.6.661a2.262 2.262 0 001.6-3.86L33.198 30z"
+						/>
+					</svg>
+				</div>
+
+				<div
+					class="donate-code-container"
+					data-status="donation-required"
+					data-target="pure-donate-code-container"
+				>
+					<div class="donate-code-spinner spinner--dots" data-target="pure-donate-code-spinner">
+						<div></div>
+						<div></div>
+					</div>
+					<div class="donate-code" data-target="pure-donate-code">???</div>
+				</div>
+
+				<p>
+					Once you've donated, 👇 tap the
+					<b class="donate-button">&#x2764; Donate</b> button on your watch, and enter the 3-digit donation
+					code above.
+				</p>
+
+				<div class="button-group button-group--donate-primary">
+					<a
+						class="button button--flat-primary"
+						title="Donate via PayPal"
+						href="https://paypal.me/eamodio/3USD"
+						target="_blank"
+						data-action="pure-donate-button"
+						data-target="pure-donate-button"
+						data-payment-via="paypal"
+						>Donate <span class="via">via</span> PayPal</a
+					>
+					<!-- <a
+						class="button button--flat-primary"
+						title="Donate via Cash App"
+						href="https://cash.me/$eamodio"
+						target="_blank"
+						data-action="pure-donate-button"
+						data-target="pure-donate-button"
+						data-payment-via="cash.app"
+						>Donate <span class="via">via</span> Cash App</a
+					> -->
+				</div>
+				<p class="note">
+					<b>NOTE</b>: You will <b>NOT</b> receive an email with a code, as it will be provided above. If you
+					have any issues, please
+					<a class="email" href="mailto:eamodio+pure@gmail.com?subject=Pure Clock Face">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+							<path
+								fill="#fff"
+								d="M24.84 9.049v10.947c0 .606-.216 1.126-.648 1.56a2.128 2.128 0 0 1-1.558.647H2.338a2.124 2.124 0 0 1-1.558-.648 2.133 2.133 0 0 1-.648-1.56V9.051c.404.45.868.85 1.392 1.2 3.328 2.26 5.612 3.845 6.853 4.756.526.386.953.687 1.28.903.326.216.763.436 1.31.66.546.226 1.053.34 1.52.34h.03c.473 0 .98-.114 1.52-.34.546-.224.983-.444 1.31-.66a33.09 33.09 0 0 0 1.276-.904c1.562-1.134 3.85-2.72 6.866-4.76.524-.36.984-.76 1.38-1.2l-.024.004zm.024-4.058c0 .72-.225 1.413-.675 2.08a6.59 6.59 0 0 1-1.69 1.69l-6.46 4.48-.59.42c-.3.213-.549.386-.745.52-.197.133-.436.283-.717.45-.28.166-.544.29-.79.37-.247.08-.477.12-.69.12h-.025c-.21 0-.44-.042-.69-.125a4.272 4.272 0 0 1-.79-.37c-.28-.167-.519-.317-.715-.45a44.146 44.146 0 0 1-.748-.523c-.298-.218-.492-.36-.584-.424a721.312 721.312 0 0 0-3.61-2.516C3.773 9.622 2.826 8.976 2.506 8.776c-.571-.387-1.109-.918-1.614-1.592-.507-.674-.76-1.3-.76-1.88 0-.716.19-1.312.572-1.79.381-.478.926-.716 1.634-.716h20.296c.597 0 1.114.216 1.55.648.437.433.656.953.656 1.56l.024-.01z"
+							/>
+						</svg>
+
+						contact support</a
+					>.
+				</p>
+
+				<h3>&#x2764; Thank you!</h3>
+			</div>
 
 			<ul class="donate-tiers-features">
 				<li>
@@ -108,9 +173,7 @@
 					<span>
 						Battery
 						<p>Don't forget to charge your watch again</p>
-						<p class="feature-customizable">
-							Customizable &mdash; choose to show the battery percentage
-						</p>
+						<p class="feature-customizable">Customizable &mdash; choose to show the battery percentage</p>
 					</span>
 				</li>
 				<li class="locked">
@@ -121,9 +184,7 @@
 							Animated indicators show how close you are to reaching your goals, or if you have reached
 							them
 						</p>
-						<p class="feature-customizable">
-							Customizable &mdash; choose whether to show the units
-						</p>
+						<p class="feature-customizable">Customizable &mdash; choose whether to show the units</p>
 					</span>
 				</li>
 				<li class="locked">

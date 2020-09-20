@@ -75,18 +75,18 @@
 					</div>
 
 					<!-- prettier-ignore -->
-					<%= require('./partials/about.ejs')() %>
+					<%= require('html-loader!./partials/about.html') %>
 					<!-- prettier-ignore -->
-					<%= require('./partials/sponsor.ejs')() %>
+					<%= require('html-loader!./partials/sponsor.html') %>
 					<!-- prettier-ignore -->
-					<%= require('./partials/gitlens.ejs')() %>
+					<%= require('html-loader!./partials/gitlens.html') %>
 					<!-- prettier-ignore -->
-					<%= require('./partials/pure.ejs')() %>
+					<%= require('html-loader!./partials/pure.html') %>
 				</div>
 			</div>
 		</section>
 
 		<!-- prettier-ignore -->
-		<%= require('./partials/footer.ejs')() %>
+		<%= require('html-loader!./partials/footer.html') %>
 	</body>
 </html>

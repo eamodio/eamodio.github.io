@@ -8,7 +8,7 @@ export class MainView {
 	private typingSubhead: Typed | undefined;
 	private typingDesc: Typed | undefined;
 
-	activate(previous?: string) {
+	activate(previous?: string): void {
 		if (previous) {
 			setTimeout(() => this.startSubheadTyping(), 1000);
 		} else {

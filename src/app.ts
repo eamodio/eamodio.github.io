@@ -37,7 +37,7 @@ export class App {
 		}, 750); // Wait for the length of the fade-out animation
 	}
 
-	switchView(hash: string, paths: string[], loading = false) {
+	switchView(hash: string, paths: string[], loading = false): void {
 		const previous = this.activeView;
 
 		switch (hash) {

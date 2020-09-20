@@ -216,11 +216,55 @@ a {
 	}
 }
 
+.button--flat-inverse-secondary {
+	background-color: transparent;
+	border: 1px solid black;
+	color: black !important;
+	font-weight: 600;
+	transition: background-color 250ms, border-color 250ms, color 250ms;
+
+	&:hover {
+		background-color: white;
+		border-color: black;
+		color: black !important;
+
+		& .button__icon--svg {
+			filter: invert(100%);
+		}
+	}
+
+	body.preload & {
+		transition-duration: 0s !important;
+	}
+}
+
 .button-group {
 	display: flex;
 	flex-wrap: wrap;
 
 	& .button {
+		white-space: nowrap;
+	}
+}
+
+.button-group--primary {
+	font-size: 0.5em;
+	justify-content: center;
+	margin: 0;
+
+	& .button {
+		margin: 1em 1.5em;
+		white-space: nowrap;
+	}
+}
+
+.button-group--secondary {
+	font-size: 0.4em;
+	justify-content: space-evenly;
+	margin: 0;
+
+	& .button {
+		margin: 1em 1.5em;
 		white-space: nowrap;
 	}
 }
@@ -260,7 +304,10 @@ a {
 
 .button-group--cta-left {
 	float: right;
-	margin: 0.5em -1em -1em -1em;
+
+	.sponsor--github {
+		margin: 1em 0 0 0;
+	}
 }
 
 p.button__badge {
@@ -441,7 +488,8 @@ p.button__badge {
 
 	& h4 {
 		font-size: 0.8em;
-		margin: 1.5em 0 1em 0;
+		margin: 0 0 0.5em 0;
+		// margin: 1.5em 0 1em 0;
 		text-align: center;
 		font-weight: 200;
 	}
@@ -706,6 +754,25 @@ footer {
 
 	&:hover {
 		opacity: 0.99;
+	}
+}
+
+.sponsors {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+
+	h2 {
+		font-weight: 200;
+	}
+
+	h2.footer {
+		font-size: 0.8em;
+	}
+
+	h4.footer {
+		font-size: 0.6em;
 	}
 }
 
@@ -1032,7 +1099,7 @@ footer {
 	.subhead {
 		text-align: center;
 		color: #666;
-		margin: -2.25em 1em 0 1em;
+		margin: -1.5em 1em 0 1em;
 		font-size: 0.4em;
 	}
 }
@@ -1468,11 +1535,6 @@ img.center {
 
 	.button-group--cta-left {
 		font-size: 0.5em;
-
-		.button {
-			margin: 1em 1em 0 0;
-			padding: 1em;
-		}
 	}
 
 	.donate-tiers {

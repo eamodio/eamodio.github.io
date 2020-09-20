@@ -12,7 +12,7 @@ interface Donation {
 enum DonationTier {
 	OneDollar = 1,
 	TwoDollars = 2,
-	ThreePlusDollars = 3
+	ThreePlusDollars = 3,
 }
 
 const DonationKey = 'pure-donation';
@@ -51,7 +51,7 @@ export class PureView extends View {
 		);
 	}
 
-	activate(paths?: string[], loading: boolean = false) {
+	activate(paths?: string[], loading: boolean = false): void {
 		super.activate(paths, loading);
 
 		const [$email] = DOM.$<HTMLAnchorElement>('[data-target="email"]');
@@ -125,7 +125,7 @@ export class PureView extends View {
 		}
 	}
 
-	deactivate() {
+	deactivate(): void {
 		super.deactivate();
 
 		const [$email] = DOM.$<HTMLAnchorElement>('[data-target="email"]');
@@ -149,7 +149,7 @@ export class PureView extends View {
 		const donation: Donation = {
 			timestamp: date.getTime(),
 			tier: this._tier,
-			version: 1
+			version: 1,
 		};
 
 		Storage.set(DonationKey, donation);
@@ -207,6 +207,7 @@ export class PureView extends View {
 
 				$container.dataset.status = 'pending';
 
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				pendingTimeout = setTimeout(() => {
 					$container.dataset.status = 'still-pending';
 
@@ -215,9 +216,11 @@ export class PureView extends View {
 						clearTimeout(acceptTimeout);
 
 						$container.dataset.status = 'pending';
+						// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 						clickTimeout = setTimeout(() => this.updateDonation($container, $code), 1000) as any;
 					});
 
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 					acceptTimeout = setTimeout(() => {
 						clickDisposable?.dispose();
 
@@ -235,16 +238,13 @@ export class PureView extends View {
 
 				disposable.dispose();
 				clickDisposable?.dispose();
-			}
+			},
 		};
 	}
 
 	private updateDonation($container: HTMLDivElement, $code: HTMLDivElement) {
 		const date = new Date();
-		const code = `${date
-			.getUTCFullYear()
-			.toString()
-			.substr(2)}${date.getUTCMonth().toString(16)}`;
+		const code = `${date.getUTCFullYear().toString().substr(2)}${date.getUTCMonth().toString(16)}`;
 
 		$container.dataset.status = 'donated';
 		$code.textContent = code;
