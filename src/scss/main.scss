@@ -283,7 +283,7 @@ a {
 .button-group--sponsor-primary {
 	font-size: 0.5em;
 	justify-content: center;
-	margin: 1em 0;
+	margin: 1em 0 0 0;
 
 	& .button {
 		margin: 1em 1.5em;
@@ -291,10 +291,10 @@ a {
 	}
 }
 
-.button-group--sponsor {
+.button-group--sponsor-secondary {
 	font-size: 0.4em;
 	justify-content: space-evenly;
-	margin: 1em 0 1em 0;
+	margin: 0 0 1em 0;
 
 	& .button {
 		margin: 1em 1.5em;
