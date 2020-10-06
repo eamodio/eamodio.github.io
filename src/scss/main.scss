@@ -907,6 +907,16 @@ footer {
 		white-space: nowrap;
 	}
 
+	.donate-code-notice {
+		h4 + p {
+			margin-top: -1.5em;
+		}
+
+		p {
+			font-size: 0.5em;
+		}
+	}
+
 	.donate-code-container {
 		display: flex;
 		align-items: center;
@@ -1177,7 +1187,7 @@ footer {
 					right: 14px;
 					content: 'Donate to unlock';
 					font-size: 0.45em;
-					margin-top: 32px;
+					margin-top: 64px;
 					font-variant: all-small-caps;
 					color: #999999;
 				}

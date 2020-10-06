@@ -33,17 +33,12 @@ export class PureView extends View {
 		[this.$donatePopup] = DOM.$<HTMLElement>('[data-target="pure-donate-popup"]');
 
 		const donation = Storage.get<Donation>(DonationKey);
-		if (donation === undefined) return;
+		if (donation == null) return;
 
-		const [$donatedOn] = DOM.$<HTMLParagraphElement>('[data-target="pure-donated-on"]');
-		if ($donatedOn == null) {
-			const template = document.createElement('template');
-			template.innerHTML = `<p class="donated" data-target="pure-donated-on">
-	You donated on ${new Date(donation.timestamp).toLocaleDateString()}. Thank you!
-</p>`;
-
-			this.$donatePopup.prepend(template.content.firstChild!);
-		}
+		const [$donateCodeNotice] = DOM.$<HTMLParagraphElement>('[data-target="pure-donate-code-notice"]');
+		$donateCodeNotice.innerText = `You donated on ${new Date(
+			donation.timestamp
+		).toLocaleDateString()}.\nThank you!`;
 
 		this.updateDonation(
 			DOM.$<HTMLDivElement>('[data-target="pure-donate-code-container"]')[0]!,
