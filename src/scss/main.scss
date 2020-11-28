@@ -1034,6 +1034,7 @@ footer {
 		position: relative;
 		user-select: none;
 		transition: background-color 250ms, color 250ms;
+		text-transform: uppercase;
 
 		&:hover {
 			background-color: darken(#c85050, 10%);
