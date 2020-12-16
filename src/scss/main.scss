@@ -757,7 +757,7 @@ footer {
 	}
 }
 
-.sponsors {
+.section-sponsors {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -774,6 +774,20 @@ footer {
 	h4.footer {
 		font-size: 0.6em;
 	}
+}
+
+.sponsors {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sponsor__image {
+	width: 75%;
+}
+
+.sponsor__image-link {
+	text-align: center;
 }
 
 .marvin {
