@@ -714,6 +714,14 @@ footer {
 	}
 }
 
+.footer__left {
+	display: flex;
+	position: absolute;
+	bottom: 0.1em;
+	left: 0.5em;
+	align-items: center;
+}
+
 .footer__attribution {
 	color: rgba(255, 255, 255, 0.5);
 	font-size: 0.7rem;
@@ -721,9 +729,6 @@ footer {
 	letter-spacing: 0.1em;
 	opacity: 0.99;
 	text-transform: uppercase;
-	position: absolute;
-	bottom: 0.1em;
-	left: 0.5em;
 
 	span {
 		font-size: 0.5rem;
@@ -750,7 +755,7 @@ footer {
 	width: 35px;
 	position: absolute;
 	right: 0;
-	bottom: 0.1em;
+	bottom: 5px;
 
 	&:hover {
 		opacity: 0.99;
@@ -1694,3 +1699,5 @@ img.center {
 		display: none;
 	}
 }
+
+@import 'snow';
