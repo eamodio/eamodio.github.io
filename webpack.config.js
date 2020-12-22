@@ -73,7 +73,10 @@ module.exports = function (env, argv) {
 		}),
 		new PurgecssPlugin({
 			paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true }),
-			whitelistPatterns: [/is-section--.*/, /iframe/, /typed-.*/],
+			safelist: {
+				standard: [/iframe/],
+				greedy: [/is-section--.*/],
+			},
 		}),
 		new HtmlPlugin({
 			template: 'src/index.html',
