@@ -836,12 +836,12 @@ footer {
 
 .watch {
 	background: url('../assets/watch.png') center center / contain no-repeat;
-	height: 231px;
-	width: 231px;
-	max-height: 231px;
-	max-width: 231px;
-	min-height: 231px;
-	min-width: 231px;
+	height: 234px;
+	width: 234px;
+	max-height: 234px;
+	max-width: 234px;
+	min-height: 234px;
+	min-width: 234px;
 	flex: auto 1 1;
 	position: relative;
 	cursor: pointer;
@@ -851,12 +851,12 @@ footer {
 	&::after {
 		content: '';
 		position: absolute;
-		top: 0;
-		left: 0;
+		top: 2px;
+		left: 2px;
 		height: 100%;
 		width: 100%;
 		background: url(../assets/pure.png) center center / contain no-repeat;
-		transform: translate(0%, 0%) scale(0.64935);
+		transform: translate(0%, 0%) scale(0.71795);
 	}
 
 	&.expand {
