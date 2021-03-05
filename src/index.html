@@ -83,18 +83,18 @@
 					</div>
 
 					<!-- prettier-ignore -->
-					<%= require('html-loader!./partials/about.html') %>
+					<%= require('html-loader?{"esModule":false}!./partials/about.html') %>
 					<!-- prettier-ignore -->
-					<%= require('html-loader!./partials/sponsor.html') %>
+					<%= require('html-loader?{"esModule":false}!./partials/sponsor.html') %>
 					<!-- prettier-ignore -->
-					<%= require('html-loader!./partials/gitlens.html') %>
+					<%= require('html-loader?{"esModule":false}!./partials/gitlens.html') %>
 					<!-- prettier-ignore -->
-					<%= require('html-loader!./partials/pure.html') %>
+					<%= require('html-loader?{"esModule":false}!./partials/pure.html') %>
 				</div>
 			</div>
 		</section>
 
 		<!-- prettier-ignore -->
-		<%= require('html-loader!./partials/footer.html') %>
+		<%= require('html-loader?{"esModule":false}!./partials/footer.html') %>
 	</body>
 </html>
