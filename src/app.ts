@@ -45,7 +45,7 @@ export class App {
 				this.activeView = '';
 
 				if (previous !== this.activeView) {
-					const prev = this.views.find(v => v.name === previous);
+					const prev = this.views.find((v) => v.name === previous);
 					if (prev != null) {
 						prev.deactivate();
 					}
@@ -67,7 +67,7 @@ export class App {
 				break;
 			}
 			default: {
-				const view = this.views.find(v => v.name === hash);
+				const view = this.views.find((v) => v.name === hash);
 				if (view == null) {
 					this.switchView('', [], false);
 					return;
@@ -76,7 +76,7 @@ export class App {
 				this.activeView = hash;
 
 				if (previous !== this.activeView) {
-					const prev = this.views.find(v => v.name === previous);
+					const prev = this.views.find((v) => v.name === previous);
 					if (prev != null) {
 						prev.deactivate();
 					}
@@ -96,7 +96,7 @@ export class App {
 		document.location.hash = '';
 	}
 
-	private onHashChanged(e: HashChangeEvent) {
+	private onHashChanged(e: Event) {
 		const [hash, paths] = this.getHashAndPaths();
 
 		if (this.redirect(hash, paths)) return;

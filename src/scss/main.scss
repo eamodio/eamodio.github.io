@@ -1,14 +1,14 @@
 @import '_normalize';
 
 body:not(.is-section--about) #section-about,
-body:not(.is-section--sponsor) #section-sponsor,
+// body:not(.is-section--sponsor) #section-sponsor,
 body:not(.is-section--gitlens) #section-gitlens,
 body:not(.is-section--pure) #section-pure {
 	display: none;
 }
 
 body.is-section--about #about-button,
-body.is-section--sponsor #sponsor-button,
+// body.is-section--sponsor #sponsor-button,
 body.is-section--gitlens #gitlens-button,
 body.is-section--pure #pure-button {
 	background: white !important;
