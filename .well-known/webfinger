@@ -1,0 +1,23 @@
+{
+	"subject": "acct:eamodio@hachyderm.io",
+	"aliases": [
+		"https://hachyderm.io/@eamodio",
+		"https://hachyderm.io/users/eamodio"
+	],
+	"links": [
+		{
+			"rel": "http://webfinger.net/rel/profile-page",
+			"type": "text/html",
+			"href": "https://hachyderm.io/@eamodio"
+		},
+		{
+			"rel": "self",
+			"type": "application/activity+json",
+			"href": "https://hachyderm.io/users/eamodio"
+		},
+		{
+			"rel": "http://ostatus.org/schema/1.0/subscribe",
+			"template": "https://hachyderm.io/authorize_interaction?uri={uri}"
+		}
+	]
+}
