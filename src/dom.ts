@@ -42,7 +42,7 @@ export namespace DOM {
 					for (const $el of $els) {
 						$el.removeEventListener(name, listener as EventListener, options ?? false);
 					}
-				}
+				},
 			};
 		}
 
@@ -53,7 +53,7 @@ export namespace DOM {
 				disposed = true;
 
 				selectorOrElement.removeEventListener(name, listener as EventListener, options ?? false);
-			}
+			},
 		};
 	}
 

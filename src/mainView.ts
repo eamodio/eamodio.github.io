@@ -73,7 +73,7 @@ export class MainView {
 			backDelay: 1500,
 			backSpeed: 30,
 			typeSpeed: 90,
-			onComplete: () => this.onSubheadTypingCompleted(strings)
+			onComplete: () => this.onSubheadTypingCompleted(strings),
 		};
 		this.typingSubhead = new Typed('#subhead', opts);
 	}
@@ -86,7 +86,7 @@ export class MainView {
 			backDelay: 1500,
 			backSpeed: 30,
 			typeSpeed: 90,
-			onComplete: () => this.onDescTypingCompleted(strings)
+			onComplete: () => this.onDescTypingCompleted(strings),
 		};
 		this.typingDesc = new Typed('#desc', opts);
 	}
